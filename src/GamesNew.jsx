@@ -22,6 +22,10 @@ export function GamesNew(props) {
           Image: <input name="image" type="text" />
         </div>
 
+        <div>
+          Price: <input name="price" type="number" />
+        </div>
+
 
         <div>
           Console:

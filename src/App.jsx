@@ -19,7 +19,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Header currentUser={currentUser} />
-        <Content />
+        <Content currentUser={currentUser} />
         <Footer />
       </BrowserRouter>
     </div>

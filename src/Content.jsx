@@ -8,8 +8,9 @@ import { GamesIndex } from "./GamesIndex"
 import { ConsolesShow } from "./ConsolesShow"
 import { GamesNew } from "./GamesNew"
 import { ConsolesNew } from "./ConsolesNew"
+import { Profile } from "./Profile"
 
-export function Content() {
+export function Content(props) {
   const [consoles, setConsoles] = useState([])
   const [games, setGames] = useState([])
 
@@ -34,6 +35,13 @@ export function Content() {
     });
   };
 
+  const handleCreateGame = (params, successCallback) => {
+    axios.post("http://localhost:3000/games.json", params).then((response) => {
+      setGames([...games, response.data]);
+      successCallback();
+    });
+  };
+
   useEffect(getConsoleData, [])
   useEffect(getGamesData, [])
 
@@ -45,8 +53,9 @@ export function Content() {
         <Route path="/consoles" element={<ConsolesIndex consoles={consoles} />} />
         <Route path="/games" element={<GamesIndex games={games} />} />
         <Route path="/consoles/:id" element={<ConsolesShow />} />
-        <Route path="/games/new" element={<GamesNew />} />
+        <Route path="/games/new" element={<GamesNew onCreateGame={handleCreateGame} consoles={consoles} />} />
         <Route path="/consoles/new" element={<ConsolesNew onCreateConsole={handleCreateConsole} />} />
+        <Route path="/me" element={<Profile currentUser={props.currentUser} />} />
       </Routes>
     </div>
   )

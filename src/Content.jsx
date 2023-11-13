@@ -6,6 +6,8 @@ import { Login } from "./Login"
 import { ConsolesIndex } from "./ConsolesIndex"
 import { GamesIndex } from "./GamesIndex"
 import { ConsolesShow } from "./ConsolesShow"
+import { GamesNew } from "./GamesNew"
+import { ConsolesNew } from "./ConsolesNew"
 
 export function Content() {
   const [consoles, setConsoles] = useState([])
@@ -36,6 +38,8 @@ export function Content() {
         <Route path="/consoles" element={<ConsolesIndex consoles={consoles} />} />
         <Route path="/games" element={<GamesIndex games={games} />} />
         <Route path="/consoles/:id" element={<ConsolesShow />} />
+        <Route path="/games/new" element={<GamesNew />} />
+        <Route path="/consoles/new" element={<ConsolesNew />} />
       </Routes>
     </div>
   )

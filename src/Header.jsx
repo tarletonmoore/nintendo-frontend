@@ -3,7 +3,22 @@ import { LogoutLink } from "./LogoutLink";
 
 export function Header(props) {
 
+  let adminLinks;
 
+  if (props.currentUser.admin) {
+    adminLinks = (
+      <>
+        <li className="nav-item">
+          <Link to="/games/new" className="nav-link" >Add Game</Link>
+
+        </li>
+        <li className="nav-item">
+          <Link to="/consoles/new" className="nav-link" >Add Console</Link>
+
+        </li>
+      </>
+    )
+  }
 
   let authenticationLinks;
 
@@ -55,6 +70,7 @@ export function Header(props) {
                 <a className="nav-link active" aria-current="page" href="/consoles">Home</a>
               </li>
               {authenticationLinks}
+              {adminLinks}
             </ul>
 
           </div>

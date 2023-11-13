@@ -27,6 +27,13 @@ export function Content() {
     })
   }
 
+  const handleCreateConsole = (params, successCallback) => {
+    axios.post("http://localhost:3000/consoles.json", params).then((response) => {
+      setConsoles([...consoles, response.data]);
+      successCallback();
+    });
+  };
+
   useEffect(getConsoleData, [])
   useEffect(getGamesData, [])
 
@@ -39,7 +46,7 @@ export function Content() {
         <Route path="/games" element={<GamesIndex games={games} />} />
         <Route path="/consoles/:id" element={<ConsolesShow />} />
         <Route path="/games/new" element={<GamesNew />} />
-        <Route path="/consoles/new" element={<ConsolesNew />} />
+        <Route path="/consoles/new" element={<ConsolesNew onCreateConsole={handleCreateConsole} />} />
       </Routes>
     </div>
   )

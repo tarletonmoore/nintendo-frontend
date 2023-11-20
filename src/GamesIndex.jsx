@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 
 
 export function GamesIndex(props) {
@@ -13,10 +14,14 @@ export function GamesIndex(props) {
               <h2>{game.title}</h2>
               <p>Price: ${game.price}</p>
               <p>Console: {game.console.name}</p>
+              <Link to={`/games/${game.id}`}>
+                <button>Go To Show Page</button>
+              </Link>
             </div>
           </div>
         </div>
-      ))}
-    </div>
+      ))
+      }
+    </div >
   )
 }

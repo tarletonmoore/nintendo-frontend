@@ -9,6 +9,8 @@ import { ConsolesShow } from "./ConsolesShow"
 import { GamesNew } from "./GamesNew"
 import { ConsolesNew } from "./ConsolesNew"
 import { Profile } from "./Profile"
+import { CartedGamesIndex } from "./CartedGamesIndex"
+import { GamesShow } from "./GamesShow"
 
 export function Content(props) {
   const [consoles, setConsoles] = useState([])
@@ -56,6 +58,8 @@ export function Content(props) {
         <Route path="/games/new" element={<GamesNew onCreateGame={handleCreateGame} consoles={consoles} />} />
         <Route path="/consoles/new" element={<ConsolesNew onCreateConsole={handleCreateConsole} />} />
         <Route path="/me" element={<Profile currentUser={props.currentUser} />} />
+        <Route path="/carted_games" element={<CartedGamesIndex />} />
+        <Route path="/games/:id" element={<GamesShow />} />
       </Routes>
     </div>
   )

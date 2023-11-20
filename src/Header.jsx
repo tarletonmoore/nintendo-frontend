@@ -53,6 +53,10 @@ export function Header(props) {
           <Link to="/games" className="nav-link" >All Games</Link>
 
         </li>
+        <li className="nav-item">
+          <Link to="/carted_games" className="nav-link" >Shopping Cart</Link>
+
+        </li>
 
       </>
     )

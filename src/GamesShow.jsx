@@ -34,21 +34,23 @@ export function GamesShow() {
   }
 
   return (
-    <div>
-      <h1>{game.title}</h1>
-      <img src={game.image} width="200px" height="250px" />
-      <p>Price: {game.price}</p>
-      <p>Console: {game.console.name}</p>
-      <form onSubmit={handleAddToCart}>
-        <div>
-          quantity: <input name="quantity" type="number" />
-        </div>
-        <div>
-          <input name="game_id" type="hidden" defaultValue={game.id} />
-        </div>
-
-        <button>Add to cart</button>
-      </form>
+    <div className="card">
+      <div className="card-body">
+        <h1>{game.title}</h1>
+        <img src={game.image} width="200px" height="250px" />
+        <p>Price: {game.price}</p>
+        <p>Console: {game.console.name}</p>
+        <form onSubmit={handleAddToCart}>
+          <div>
+            quantity: <input name="quantity" type="number" />
+          </div>
+          <div>
+            <input name="game_id" type="hidden" defaultValue={game.id} />
+          </div>
+          <br></br>
+          <button>Add to cart</button>
+        </form>
+      </div>
     </div>
   );
 }

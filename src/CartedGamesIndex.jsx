@@ -40,18 +40,26 @@ export function CartedGamesIndex() {
   return (
     <div>
       <h1>Shopping Cart</h1>
-      {cartedGames.map(cartedGame => (
-        <div key={cartedGame.id} className="card">
-          <div className="card-body">
-            <img src={cartedGame.game.image} width="150px" height="200px" />
-            <h3>{cartedGame.game.title}</h3>
-            <p>Quantity: {cartedGame.quantity}</p>
-            <p>Cost: ${cartedGame.game.price * cartedGame.quantity}</p>
+      {cartedGames.length > 0 ? (
+        cartedGames.map(cartedGame => (
+          <div key={cartedGame.id} className="card">
+            <div className="card-body">
+              <img src={cartedGame.game.image} width="150px" height="200px" />
+              <h3>{cartedGame.game.title}</h3>
+              <p>Quantity: {cartedGame.quantity}</p>
+              <p>Cost: ${cartedGame.game.price * cartedGame.quantity}</p>
+            </div>
           </div>
+        ))
+      ) : (
+        <p>Nothing in cart</p>
+      )}
+      {cartedGames.length > 0 && (
+        <div>
+          <h4>Subtotal: ${totalCost}</h4>
+          <button onClick={buy}>Checkout</button>
         </div>
-      ))}
-      <h4>Subtotal: ${totalCost}</h4>
-      <button onClick={buy}>Checkout</button>
+      )}
     </div>
   )
 }

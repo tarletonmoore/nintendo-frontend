@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export function ConsolesShow(props) {
   const [console, setConsole] = useState([])
   const [consoleGames, setConsoleGames] = useState([])
+  const [showGames, setShowGames] = useState(false);
+
 
   const params = useParams()
   const getConsoleData = () => {
@@ -17,29 +20,39 @@ export function ConsolesShow(props) {
   const handleConsoleGames = () => {
 
     setConsoleGames(console.games)
+    setShowGames(prevState => !prevState)
   }
 
   useEffect(getConsoleData, [])
 
   return (
-    <div>
-      <h1>Console Info</h1>
-      <h2>{console.name}</h2>
-      <img src={console.image} width="200px" height="300px" />
-      <h3>Year Released: {console.year}</h3>
-      <br></br>
-      <h2>Games For This {console.name}</h2>
-      <button onClick={handleConsoleGames}>Show Games</button>
-      {consoleGames.map(game => (
-        <div key={game.id}>
-          <div className="card">
-            <div className="card-body">
-              <img src={game.image} width="150px" height="200px" />
-              <h3>{game.title}</h3>
+    <div className="card">
+      <div className="card-body">
+        <h1>Console Info</h1>
+        <h2>{console.name}</h2>
+        <img src={console.image} width="200px" height="300px" />
+        <h3>Year Released: {console.year}</h3>
+        <br></br>
+        <h2>Games For This {console.name}</h2>
+        <button onClick={handleConsoleGames}>{showGames ? 'Hide Games' : 'Show Games'}</button>
+        <br></br>
+        <br></br>
+        {showGames && (
+          consoleGames.map(game => (
+            <div key={game.id}>
+              <div className="card">
+                <div className="card-body">
+                  <img src={game.image} width="150px" height="200px" />
+                  <h3>{game.title}</h3>
+                  <Link to={`/games/${game.id}`}>
+                    <button>Go To Show Page</button>
+                  </Link>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      ))}
+          ))
+        )}
+      </div>
     </div>
   )
 }

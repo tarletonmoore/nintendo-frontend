@@ -11,6 +11,17 @@ export function CartedGamesIndex() {
     })
   }
 
+  const handleDeleteGame = async (cartedGameId) => {
+    try {
+      await axios.delete(`http://localhost:3000/carted_games/${cartedGameId}.json`);
+      // Refresh carted games after deletion
+      getCartedGames();
+    } catch (error) {
+      console.error('Error deleting game:', error);
+      // Handle errors if deletion fails
+    }
+  }
+
   const totalCost = cartedGames.reduce((total, cartedGame) => {
     const itemTotal = cartedGame.game.price * cartedGame.quantity;
     return total + itemTotal;
@@ -48,6 +59,7 @@ export function CartedGamesIndex() {
               <h3>{cartedGame.game.title}</h3>
               <p>Quantity: {cartedGame.quantity}</p>
               <p>Cost: ${cartedGame.game.price * cartedGame.quantity}</p>
+              <button onClick={() => handleDeleteGame(cartedGame.id)}>Remove from Cart</button>
             </div>
           </div>
         ))

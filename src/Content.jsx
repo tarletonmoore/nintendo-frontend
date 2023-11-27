@@ -11,6 +11,7 @@ import { ConsolesNew } from "./ConsolesNew"
 import { Profile } from "./Profile"
 import { CartedGamesIndex } from "./CartedGamesIndex"
 import { GamesShow } from "./GamesShow"
+import { OrdersShow } from "./OrdersShow"
 
 export function Content(props) {
   const [consoles, setConsoles] = useState([])
@@ -60,6 +61,7 @@ export function Content(props) {
         <Route path="/me" element={<Profile currentUser={props.currentUser} />} />
         <Route path="/carted_games" element={<CartedGamesIndex />} />
         <Route path="/games/:id" element={<GamesShow />} />
+        <Route path="/orders/:orderId" element={<OrdersShow />} />
       </Routes>
     </div>
   )

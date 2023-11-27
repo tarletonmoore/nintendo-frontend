@@ -16,6 +16,26 @@ export function CartedGamesIndex() {
     return total + itemTotal;
   }, 0);
 
+
+  const buy = async () => {
+    try {
+      const response = await axios.post("http://localhost:3000/orders.json");
+      console.log('Response data:', response.data); // Check the response data
+
+      const orderId = response.data.id; // Assuming the ID is returned upon creation
+      if (orderId) {
+        // Redirect to the order show page with the obtained orderId
+        window.location.href = `/orders/${orderId}`;
+      } else {
+        console.error('Order ID not received.');
+        // Handle the case where the order ID is not received
+      }
+    } catch (error) {
+      console.error('Error during purchase:', error);
+      // Handle errors if the purchase fails
+    }
+  }
+
   useEffect(getCartedGames, [])
   return (
     <div>
@@ -31,6 +51,7 @@ export function CartedGamesIndex() {
         </div>
       ))}
       <h4>Subtotal: ${totalCost}</h4>
+      <button onClick={buy}>Checkout</button>
     </div>
   )
 }

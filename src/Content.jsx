@@ -16,6 +16,7 @@ import { OrdersShow } from "./OrdersShow"
 export function Content(props) {
   const [consoles, setConsoles] = useState([])
   const [games, setGames] = useState([])
+  const [favorites, setFavorites] = useState([])
 
   const getConsoleData = () => {
     axios.get("http://localhost:3000/consoles.json").then(response => {
@@ -45,8 +46,16 @@ export function Content(props) {
     });
   };
 
+  const getFavoritesData = () => {
+    axios.get("http://localhost:3000/favorites.json").then(response => {
+      setFavorites(response.data)
+    }
+    )
+  }
+
   useEffect(getConsoleData, [])
   useEffect(getGamesData, [])
+  useEffect(getFavoritesData, [])
 
   return (
     <div>
@@ -58,7 +67,7 @@ export function Content(props) {
         <Route path="/consoles/:id" element={<ConsolesShow />} />
         <Route path="/games/new" element={<GamesNew onCreateGame={handleCreateGame} consoles={consoles} />} />
         <Route path="/consoles/new" element={<ConsolesNew onCreateConsole={handleCreateConsole} />} />
-        <Route path="/me" element={<Profile currentUser={props.currentUser} />} />
+        <Route path="/me" element={<Profile currentUser={props.currentUser} favorites={favorites} />} />
         <Route path="/carted_games" element={<CartedGamesIndex />} />
         <Route path="/games/:id" element={<GamesShow />} />
         <Route path="/orders/:orderId" element={<OrdersShow />} />

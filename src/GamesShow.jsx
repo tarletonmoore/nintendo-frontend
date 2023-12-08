@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 export function GamesShow() {
   const { id } = useParams();
   const [game, setGame] = useState(null);
+  // const [reviews, setReviews] = useState([])
 
   const getGameData = () => {
     axios.get(`http://localhost:3000/games/${id}.json`).then((response) => {
@@ -24,10 +25,19 @@ export function GamesShow() {
     })
   }
 
+  const getReviews = () => {
+    axios.get("http://localhost:3000/reviews.json").then(response => {
+      console.log(response.data)
+      setReviews(response.data)
+    })
+  }
+
 
   useEffect(() => {
     getGameData();
   }, [id]);
+
+  // useEffect(getReviews, [])
 
   if (!game) {
     return <div>Loading...</div>;
@@ -37,7 +47,7 @@ export function GamesShow() {
     <div className="card">
       <div className="card-body">
         <h1>{game.title}</h1>
-        <img src={game.image} width="200px" height="250px" />
+        <img src={game.image} height="250px" />
         <p>Price: {game.price}</p>
         <p>Console: {game.console.name}</p>
         <form onSubmit={handleAddToCart}>
@@ -50,6 +60,19 @@ export function GamesShow() {
           <br></br>
           <button>Add to cart</button>
         </form>
+        <br></br>
+        <h2>Reviews:</h2>
+        {game.reviews.length > 0 ? (
+          game.reviews.map(review => (
+            <div key={review.id} className="card">
+              <div className="card-body">
+                <p>{review.user.name}: {review.review}</p>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>No reviews yet</p>
+        )}
       </div>
     </div>
   );

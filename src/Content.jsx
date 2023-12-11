@@ -48,6 +48,7 @@ export function Content(props) {
 
   const getFavoritesData = () => {
     axios.get("http://localhost:3000/favorites.json").then(response => {
+      console.log(response.data)
       setFavorites(response.data)
     }
     )
@@ -67,9 +68,9 @@ export function Content(props) {
         <Route path="/consoles/:id" element={<ConsolesShow />} />
         <Route path="/games/new" element={<GamesNew onCreateGame={handleCreateGame} consoles={consoles} />} />
         <Route path="/consoles/new" element={<ConsolesNew onCreateConsole={handleCreateConsole} />} />
-        <Route path="/me" element={<Profile currentUser={props.currentUser} favorites={favorites} />} />
+        <Route path="/me" element={<Profile currentUser={props.currentUser} favorites={favorites} setCurrentUser={props.setCurrentUser} />} />
         <Route path="/carted_games" element={<CartedGamesIndex />} />
-        <Route path="/games/:id" element={<GamesShow />} />
+        <Route path="/games/:id" element={<GamesShow currentUser={props.currentUser} favorites={favorites} />} />
         <Route path="/orders/:orderId" element={<OrdersShow />} />
       </Routes>
     </div>

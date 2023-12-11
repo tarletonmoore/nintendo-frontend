@@ -6,7 +6,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 
 function App() {
-  const [currentUser, setCurrentUser] = useState({})
+  const [currentUser, setCurrentUser] = useState({ favorites: [] })
 
   const getUserData = () => {
     axios.get("http://localhost:3000/me.json").then(response => {
@@ -19,7 +19,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Header currentUser={currentUser} />
-        <Content currentUser={currentUser} />
+        <Content currentUser={currentUser} setCurrentUser={setCurrentUser} />
         <Footer />
       </BrowserRouter>
     </div>

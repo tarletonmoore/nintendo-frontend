@@ -23,7 +23,7 @@ export function Signup() {
 
   return (
     <div id="signup">
-      <div className="card">
+      <div className=" signup card">
         <div className="card-body">
           <h1 className="signup">Signup</h1>
           <ul>
@@ -45,7 +45,7 @@ export function Signup() {
             <div>
               <p> Password confirmation: <input name="password_confirmation" type="password" /></p>
             </div>
-            <button type="submit" style={{ "backgroundColor": "white" }}>Signup</button>
+            <button type="submit" style={{ "backgroundColor": "white" }} className="signupbutton">Signup</button>
           </form>
         </div>
       </div>

@@ -13,22 +13,26 @@ export function ConsolesNew(props) {
   return (
     <div>
       <h1>New Product</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          Name: <input name="name" type="text" />
+      <div className="console card">
+        <div className="card-body">
+          <form onSubmit={handleSubmit}>
+            <div className="formconsolename">
+              Name: <input name="name" type="text" />
+            </div>
+
+            <div className="formconsoleimage">
+              Image: <input name="image" type="text" />
+            </div>
+            <div>
+              Year Released: <input name="year" type="text" />
+            </div>
+
+
+
+            <button type="submit" className="formbutton">Create console</button>
+          </form>
         </div>
-
-        <div>
-          Image: <input name="image" type="text" />
-        </div>
-        <div>
-          Year Released: <input name="year" type="text" />
-        </div>
-
-
-
-        <button type="submit">Create console</button>
-      </form>
+      </div>
     </div>
   );
 }

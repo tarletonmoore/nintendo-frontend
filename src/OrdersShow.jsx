@@ -21,7 +21,7 @@ export function OrdersShow() {
       <h1>Thanks for Shopping!</h1>
       {order.carted_games.map(carted_game => (
         <div key={carted_game.id}>
-          <div className="card">
+          <div className="order card">
             <div className="card-body">
               <img src={carted_game.game.image} width="150px" height="200px" />
               <h2>{carted_game.game.title}</h2>
@@ -32,12 +32,10 @@ export function OrdersShow() {
           </div>
         </div>
       ))}
-      <div className="card">
-        <div className="card-body">
-          <h3>Subtotal: {order.subtotal}</h3>
-          <h3>Tax: {order.tax}</h3>
-          <h3>Total: {order.total}</h3>
-        </div>
+      <div className="order cost">
+        <h3>Subtotal: ${order.subtotal}</h3>
+        <h3>Tax: ${order.tax}</h3>
+        <h3>Total: ${order.total}</h3>
       </div>
     </div>
   )

@@ -22,10 +22,14 @@ export function CartedGamesIndex() {
     }
   }
 
-  const totalCost = cartedGames.reduce((total, cartedGame) => {
+  const subtotalCost = cartedGames.reduce((total, cartedGame) => {
     const itemTotal = cartedGame.game.price * cartedGame.quantity;
     return total + itemTotal;
   }, 0);
+
+  const tax = subtotalCost * 0.09
+
+  const totalcost = subtotalCost + tax
 
 
   const buy = async () => {
@@ -53,7 +57,7 @@ export function CartedGamesIndex() {
       <h1>Shopping Cart</h1>
       {cartedGames.length > 0 ? (
         cartedGames.map(cartedGame => (
-          <div key={cartedGame.id} className="card">
+          <div key={cartedGame.id} className="cart card">
             <div className="card-body">
               <img src={cartedGame.game.image} width="150px" height="200px" />
               <h3>{cartedGame.game.title}</h3>
@@ -64,11 +68,13 @@ export function CartedGamesIndex() {
           </div>
         ))
       ) : (
-        <p>Nothing in cart</p>
+        <p className="emptycart">Nothing in cart</p>
       )}
       {cartedGames.length > 0 && (
-        <div>
-          <h4>Subtotal: ${totalCost}</h4>
+        <div className="cartedcost">
+          <h4>Subtotal: ${subtotalCost}</h4>
+          <h4>Tax: ${tax}</h4>
+          <h4>Total: ${totalcost}</h4>
           <button onClick={buy}>Checkout</button>
         </div>
       )}

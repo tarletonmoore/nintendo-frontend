@@ -13,31 +13,35 @@ export function GamesNew(props) {
   return (
     <div>
       <h1>New Game</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          Title: <input name="title" type="text" />
+      <div className="console card">
+        <div className="card-body">
+          <form onSubmit={handleSubmit}>
+            <div className="formgamestitle">
+              Title: <input name="title" type="text" />
+            </div>
+
+            <div className="formgamesimage">
+              Image: <input name="image" type="text" />
+            </div>
+
+            <div className="formgamesprice">
+              Price: <input name="price" type="number" />
+            </div>
+
+
+            <div className="formgamesconsole">
+              Console: &nbsp;
+              <select name="console_id">
+                {props.consoles.map(console => (
+                  <option value={console.id}>{console.name}</option>
+                ))}
+
+              </select>
+            </div>
+            <button type="submit" className="formgamesbutton">Create game</button>
+          </form>
         </div>
-
-        <div>
-          Image: <input name="image" type="text" />
-        </div>
-
-        <div>
-          Price: <input name="price" type="number" />
-        </div>
-
-
-        <div>
-          Console:
-          <select name="console_id">
-            {props.consoles.map(console => (
-              <option value={console.id}>{console.name}</option>
-            ))}
-
-          </select>
-        </div>
-        <button type="submit">Create game</button>
-      </form>
+      </div>
     </div>
   );
 }

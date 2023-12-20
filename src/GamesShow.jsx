@@ -99,37 +99,40 @@ export function GamesShow(props) {
   }
 
   return (
-    <div className="card">
+    <div className="gameshow card">
       <div className="card-body">
         <h1>{game.title}</h1>
         <img src={game.image} height="250px" />
-        <p>Price: ${game.price}</p>
-        <p>Console: {game.console.name}</p>
-        <form onSubmit={handleAddToCart}>
-          <div>
-            quantity: <input name="quantity" type="number" />
-          </div>
-          <div>
-            <input name="game_id" type="hidden" defaultValue={game.id} />
-          </div>
-          <br></br>
-          <button>Add to cart</button>
-        </form>
-        <br></br>
-        {isFavorited ? (
-          <p>This game is already in your wishlist</p>
-        ) : (
-          <form onSubmit={handleAddToFavorites}>
+        <div className="moveright">
+          <p className="boldp">Price: ${game.price}</p>
+          <p className="boldp">Console: {game.console.name}</p>
+          <form onSubmit={handleAddToCart}>
+            <div className="boldp">
+              quantity: <input name="quantity" type="number" defaultValue={1} />
+            </div>
             <div>
               <input name="game_id" type="hidden" defaultValue={game.id} />
             </div>
-            <div>
-              <input name="user_id" type="hidden" defaultValue={props.currentUser.id} />
-            </div>
-            <br />
-            <button>Add to wishlist</button>
+            <br></br>
+            <button>Add to cart</button>
           </form>
-        )}
+          <br></br>
+          {isFavorited ? (
+            <p className="boldp">This game is already in your wishlist</p>
+          ) : (
+            <form onSubmit={handleAddToFavorites}>
+              <div>
+                <input name="game_id" type="hidden" defaultValue={game.id} />
+              </div>
+              <div>
+                <input name="user_id" type="hidden" defaultValue={props.currentUser.id} />
+              </div>
+              <br />
+              <button>Add to wishlist</button>
+            </form>
+          )}
+        </div>
+        <br></br>
         <br></br>
         <h2>Reviews:</h2>
         <form onSubmit={handleAddReview}>
@@ -148,7 +151,7 @@ export function GamesShow(props) {
         <br></br>
         {game.reviews.length > 0 ? (
           game.reviews.map(review => (
-            <div key={review.id} className="card">
+            <div key={review.id} className="review card">
               <div className="card-body">
                 <p>{review.user.name}: {review.review}</p>
                 {review.user.id === props.currentUser.id && (

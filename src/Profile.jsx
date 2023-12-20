@@ -21,7 +21,7 @@ export function Profile(props) {
       <div>
         <h1>Your Wishlist:</h1>
         {props.currentUser.favorites.map(fav => (
-          <div key={fav.id} className="card">
+          <div key={fav.id} className="profile card">
             <div className="card-body">
               <h2>{fav.game.title}</h2>
               <img src={fav.game.image} height="250px" />

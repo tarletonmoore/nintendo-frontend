@@ -26,14 +26,16 @@ export function ConsolesShow(props) {
   useEffect(getConsoleData, [])
 
   return (
-    <div className="card">
+    <div className="consoleshow card">
       <div className="card-body">
         <h1>Console Info</h1>
         <h2>{console.name}</h2>
         <img src={console.image} width="200px" height="300px" />
+        <br></br>
+        <br></br>
         <h3>Year Released: {console.year}</h3>
         <br></br>
-        <h2>Games For This {console.name}</h2>
+        <h2>Games For The {console.name}</h2>
         <button onClick={handleConsoleGames}>{showGames ? 'Hide Games' : 'Show Games'}</button>
         <br></br>
         <br></br>
@@ -42,7 +44,9 @@ export function ConsolesShow(props) {
             <div key={game.id}>
               <div className="card">
                 <div className="card-body">
-                  <img src={game.image} width="150px" height="200px" />
+                  <img src={game.image} height="200px" />
+                  <br></br>
+                  <br></br>
                   <h3>{game.title}</h3>
                   <Link to={`/games/${game.id}`}>
                     <button>Go To Show Page</button>

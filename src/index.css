@@ -1,3 +1,170 @@
 html {
   scroll-behavior: smooth;
 }
+
+.moveright {
+  float: right;
+  margin-right: 200px;
+}
+
+#root {
+  background-color: darkgrey;
+}
+
+div.card {
+  background-color: darkgray;
+}
+
+nav.navbar-custom {
+  background-color: #454545 !important;
+}
+
+li.nav-item {
+  background-color: red;
+  margin-left: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.card {
+  margin-top: 20px;
+  margin-left: 10px;
+}
+
+footer {
+  padding-top: 20px;
+  text-align: center;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: darkgray;
+}
+
+div.review.card {
+  background-color: darkgray;
+}
+
+.formconsolename {
+  padding-left: 60px;
+  margin-bottom: 20px;
+}
+
+.formconsoleimage {
+  padding-left: 58px;
+  margin-bottom: 20px;
+}
+
+.formbutton {
+  margin-top: 10px;
+  margin-left: 130px;
+  background-color: darkgray;
+}
+
+.formgamestitle {
+  padding-left: 60px;
+  margin-bottom: 20px;
+}
+
+.formgamesimage {
+  padding-left: 48px;
+  margin-bottom: 20px;
+
+}
+
+.formgamesprice {
+  padding-left: 55px;
+  margin-bottom: 20px;
+
+}
+
+.formgamesconsole {
+  padding-left: 29px;
+  margin-bottom: 20px;
+}
+
+.formgamesbutton {
+  margin-left: 120px;
+  background-color: darkgray;
+}
+
+div.console.card {
+  background-color: lightgray;
+}
+
+div.game.card {
+  background-color: lightgray;
+}
+
+div.consoleshow.card {
+  background-color: lightgray;
+}
+
+div.gameshow.card {
+  background-color: lightgray;
+}
+
+.emptycart {
+  font-weight: bold;
+  text-align: center;
+}
+
+.login.card {
+  background-color: lightgray;
+}
+
+.signup.card {
+  background-color: lightgray;
+}
+
+.loginemail {
+  margin-left: 30px;
+}
+
+.signupname {
+  margin-left: 120px;
+}
+
+.signupemail {
+  margin-left: 125px;
+}
+
+.signuppass {
+  margin-left: 95px;
+}
+
+.signupbutton {
+  /* margin-left: 220px; */
+  margin-left: 50px;
+}
+
+.cartedcost {
+  padding-top: 10px;
+  padding-left: 20px;
+}
+
+.cart.card {
+  background-color: lightgray;
+}
+
+.order.card {
+  background-color: lightgray;
+}
+
+.order.cost {
+  /* background-color: lightgray; */
+  padding-top: 10px;
+  padding-left: 20px;
+}
+
+.profile.card {
+  background-color: lightgray;
+}
+
+.boldp {
+  font-weight: bold;
+}

@@ -30,7 +30,7 @@ export function Login() {
 
   return (
     <div id="login">
-      <div className="card">
+      <div className="login card">
         <div className="card-body">
           <h1 className="login">Login</h1>
           <ul>

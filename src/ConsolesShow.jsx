@@ -11,10 +11,15 @@ export function ConsolesShow(props) {
 
   const params = useParams()
   const getConsoleData = () => {
+    if (localStorage.jwt === undefined && window.location.href !== "http://localhost:5173/login") {
+      window.location.href = "/login"
+    }
+    else {
 
-    axios.get(`http://localhost:3000/consoles/${params.id}.json`).then((response) => {
-      setConsole(response.data);
-    });
+      axios.get(`http://localhost:3000/consoles/${params.id}.json`).then((response) => {
+        setConsole(response.data);
+      })
+    };
   };
 
   const handleConsoleGames = () => {

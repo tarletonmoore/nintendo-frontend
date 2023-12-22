@@ -8,11 +8,16 @@ export function GamesShow(props) {
   const [isFavorited, setIsFavorited] = useState(false)
 
   const getGameData = () => {
-    axios.get(`http://localhost:3000/games/${id}.json`).then((response) => {
-      console.log(response.data)
-      setGame(response.data);
-      checkIfFavorited()
-    });
+    if (localStorage.jwt === undefined && window.location.href !== "http://localhost:5173/login") {
+      window.location.href = "/login"
+    }
+    else {
+      axios.get(`http://localhost:3000/games/${id}.json`).then((response) => {
+        console.log(response.data)
+        setGame(response.data);
+        checkIfFavorited()
+      })
+    };
   };
 
   const handleAddToCart = (event) => {

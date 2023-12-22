@@ -5,10 +5,15 @@ export function CartedGamesIndex() {
   const [cartedGames, setCartedGames] = useState([])
 
   const getCartedGames = () => {
-    axios.get("http://localhost:3000/carted_games.json").then(response => {
-      console.log(response.data)
-      setCartedGames(response.data)
-    })
+    if (localStorage.jwt === undefined && window.location.href !== "http://localhost:5173/login") {
+      window.location.href = "/login"
+    }
+    else {
+      axios.get("http://localhost:3000/carted_games.json").then(response => {
+        console.log(response.data)
+        setCartedGames(response.data)
+      })
+    }
   }
 
   const handleDeleteGame = async (cartedGameId) => {

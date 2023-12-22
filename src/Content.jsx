@@ -19,17 +19,27 @@ export function Content(props) {
   const [favorites, setFavorites] = useState([])
 
   const getConsoleData = () => {
-    axios.get("http://localhost:3000/consoles.json").then(response => {
-      console.log(response.data)
-      setConsoles(response.data)
-    })
+    if (localStorage.jwt === undefined && window.location.href !== "http://localhost:5173/login") {
+      window.location.href = "/login"
+    }
+    else {
+      axios.get("http://localhost:3000/consoles.json").then(response => {
+        console.log(response.data)
+        setConsoles(response.data)
+      })
+    }
   }
 
   const getGamesData = () => {
-    axios.get("http://localhost:3000/games.json").then(response => {
-      console.log(response.data)
-      setGames(response.data)
-    })
+    if (localStorage.jwt === undefined && window.location.href !== "http://localhost:5173/login") {
+      window.location.href = "/login"
+    }
+    else {
+      axios.get("http://localhost:3000/games.json").then(response => {
+        console.log(response.data)
+        setGames(response.data)
+      })
+    }
   }
 
   const handleCreateConsole = (params, successCallback) => {
@@ -47,11 +57,16 @@ export function Content(props) {
   };
 
   const getFavoritesData = () => {
-    axios.get("http://localhost:3000/favorites.json").then(response => {
-      console.log(response.data)
-      setFavorites(response.data)
+    if (localStorage.jwt === undefined && window.location.href !== "http://localhost:5173/login") {
+      window.location.href = "/login"
     }
-    )
+    else {
+      axios.get("http://localhost:3000/favorites.json").then(response => {
+        console.log(response.data)
+        setFavorites(response.data)
+      }
+      )
+    }
   }
 
   useEffect(getConsoleData, [])

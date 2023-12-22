@@ -9,9 +9,14 @@ function App() {
   const [currentUser, setCurrentUser] = useState({ favorites: [] })
 
   const getUserData = () => {
-    axios.get("http://localhost:3000/me.json").then(response => {
-      setCurrentUser(response.data)
-    })
+    if (localStorage.jwt === undefined && window.location.href !== "http://localhost:5173/login") {
+      window.location.href = "/login"
+    }
+    else {
+      axios.get("http://localhost:3000/me.json").then(response => {
+        setCurrentUser(response.data)
+      })
+    }
   }
 
   useEffect(getUserData, [])

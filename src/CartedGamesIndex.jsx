@@ -10,7 +10,6 @@ export function CartedGamesIndex() {
     }
     else {
       axios.get("http://localhost:3000/carted_games.json").then(response => {
-        console.log(response.data)
         setCartedGames(response.data)
       })
     }

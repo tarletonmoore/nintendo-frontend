@@ -24,7 +24,6 @@ export function Content(props) {
     }
     else {
       axios.get("http://localhost:3000/consoles.json").then(response => {
-        console.log(response.data)
         setConsoles(response.data)
       })
     }
@@ -36,7 +35,6 @@ export function Content(props) {
     }
     else {
       axios.get("http://localhost:3000/games.json").then(response => {
-        console.log(response.data)
         setGames(response.data)
       })
     }
@@ -62,7 +60,6 @@ export function Content(props) {
     }
     else {
       axios.get("http://localhost:3000/favorites.json").then(response => {
-        console.log(response.data)
         setFavorites(response.data)
       }
       )

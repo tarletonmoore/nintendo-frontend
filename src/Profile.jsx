@@ -12,7 +12,6 @@ export function Profile(props) {
       });
     });
   };
-  console.log(props.currentUser)
 
 
   return (

@@ -9,7 +9,6 @@ export function OrdersShow() {
   console.log(orderId)
   const getOrderData = () => {
     axios.get(`http://localhost:3000/orders/${orderId}.json`).then(response => {
-      console.log(response.data)
       setOrder(response.data)
     })
   }

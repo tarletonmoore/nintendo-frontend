@@ -94,6 +94,7 @@ div.review.card {
 
 div.console.card {
   background-color: lightgray;
+  margin-right: 10px;
 }
 
 div.game.card {

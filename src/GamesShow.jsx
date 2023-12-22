@@ -13,7 +13,6 @@ export function GamesShow(props) {
     }
     else {
       axios.get(`http://localhost:3000/games/${id}.json`).then((response) => {
-        console.log(response.data)
         setGame(response.data);
         checkIfFavorited()
       })
@@ -21,15 +20,22 @@ export function GamesShow(props) {
   };
 
   const handleAddToCart = (event) => {
-    event.preventDefault()
-    const params = new FormData(event.target);
+    event.preventDefault();
+    const quantity = event.target.elements.quantity.value;
+    const errorMessage = document.getElementById('errorMessage');
 
-    console.log('adding to cart')
-    axios.post("http://localhost:3000/carted_games.json", params).then(response => {
-      console.log(response.data)
-      window.location.href = '/carted_games'
-    })
-  }
+    if (quantity <= 0) {
+      errorMessage.innerText = 'Quantity should be greater than zero.';
+    } else {
+      errorMessage.innerText = ''; // Clear error message if no error
+      const params = new FormData(event.target);
+
+      console.log('Adding to cart');
+      axios.post("http://localhost:3000/carted_games.json", params).then(response => {
+        window.location.href = '/carted_games';
+      });
+    }
+  };
 
 
 
@@ -38,7 +44,6 @@ export function GamesShow(props) {
     const params = new FormData(event.target);
 
     axios.post("http://localhost:3000/favorites.json", params).then(response => {
-      console.log(response.data)
       window.location.href = '/me'
     })
   }
@@ -118,7 +123,8 @@ export function GamesShow(props) {
             <div>
               <input name="game_id" type="hidden" defaultValue={game.id} />
             </div>
-            <br></br>
+            <div id="errorMessage" style={{ color: 'red' }}></div>
+            <br />
             <button>Add to cart</button>
           </form>
           <br></br>

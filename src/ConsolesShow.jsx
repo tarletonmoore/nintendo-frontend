@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import banjo from "./assets/banjo.mp3"
 
 export function ConsolesShow(props) {
   const [console, setConsole] = useState([])
   const [consoleGames, setConsoleGames] = useState([])
   const [showGames, setShowGames] = useState(false);
-
+  const [banjoElement] = useState(new Audio(banjo))
 
   const params = useParams()
   const getConsoleData = () => {
@@ -22,8 +23,15 @@ export function ConsolesShow(props) {
     };
   };
 
-  const handleConsoleGames = () => {
 
+  const banjoAudio = () => {
+    banjoElement.play().catch((error) => {
+      console.error("Error playing audio:", error);
+    });
+  };
+
+  const handleConsoleGames = () => {
+    banjoAudio()
     setConsoleGames(console.games)
     setShowGames(prevState => !prevState)
   }

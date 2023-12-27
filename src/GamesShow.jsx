@@ -1,11 +1,15 @@
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import mario from "./assets/mario.mp3"
+import navi from "./assets/navi.mp3"
 
 export function GamesShow(props) {
   const { id } = useParams();
   const [game, setGame] = useState(null);
   const [isFavorited, setIsFavorited] = useState(false)
+  const [audioElement] = useState(new Audio(navi))
+  const [marioElement] = useState(new Audio(mario))
 
   const getGameData = () => {
     if (localStorage.jwt === undefined && window.location.href !== "http://localhost:5173/login") {
@@ -13,30 +17,38 @@ export function GamesShow(props) {
     }
     else {
       axios.get(`http://localhost:3000/games/${id}.json`).then((response) => {
+        console.log(response.data)
         setGame(response.data);
         checkIfFavorited()
       })
     };
   };
 
-  const handleAddToCart = (event) => {
+  const handleAddToCart = async (event) => {
     event.preventDefault();
     const quantity = event.target.elements.quantity.value;
+    const gameId = event.target.elements.game_id.value; // Assuming this input holds the game ID
     const errorMessage = document.getElementById('errorMessage');
 
-    if (quantity <= 0) {
-      errorMessage.innerText = 'Quantity should be greater than zero.';
-    } else {
-      errorMessage.innerText = ''; // Clear error message if no error
-      const params = new FormData(event.target);
+    try {
+      // Fetch the game information, including its stock quantity
+      const gameResponse = await axios.get(`http://localhost:3000/games/${gameId}.json`);
+      const game = gameResponse.data;
 
-      console.log('Adding to cart');
-      axios.post("http://localhost:3000/carted_games.json", params).then(response => {
+      if (quantity <= 0 || quantity > game.stock) {
+        errorMessage.innerText = 'Invalid quantity or insufficient stock.';
+      } else {
+        errorMessage.innerText = ''; // Clear error message if no error
+        const params = new FormData(event.target);
+
+        console.log('Adding to cart');
+        await axios.post("http://localhost:3000/carted_games.json", params);
         window.location.href = '/carted_games';
-      });
+      }
+    } catch (error) {
+      console.error('Error:', error);
     }
   };
-
 
 
   const handleAddToFavorites = (event) => {
@@ -47,6 +59,18 @@ export function GamesShow(props) {
       window.location.href = '/me'
     })
   }
+
+  const playAudio = () => {
+    audioElement.play().catch((error) => {
+      console.error("Error playing audio:", error);
+    });
+  };
+
+  const marioAudio = () => {
+    marioElement.play().catch((error) => {
+      console.error("Error playing audio:", error);
+    });
+  };
 
   const handleAddReview = (event) => {
     event.preventDefault()
@@ -61,7 +85,7 @@ export function GamesShow(props) {
           name: props.currentUser.name,
         },
       };
-
+      playAudio()
       setGame((prevGame) => ({
         ...prevGame,
         reviews: [...prevGame.reviews, newReview],
@@ -78,7 +102,7 @@ export function GamesShow(props) {
   const handleDestroyReview = (review) => {
     axios.delete(`http://localhost:3000/reviews/${review.id}.json`)
       .then((response) => {
-
+        marioAudio()
         setGame((prevGame) => ({
           ...prevGame,
           reviews: prevGame.reviews.filter((r) => r.id !== review.id),
@@ -120,6 +144,8 @@ export function GamesShow(props) {
             <div className="boldp">
               quantity: <input name="quantity" type="number" defaultValue={1} />
             </div>
+            <br></br>
+            <p className="boldp">Stock: {game.stock}</p>
             <div>
               <input name="game_id" type="hidden" defaultValue={game.id} />
             </div>

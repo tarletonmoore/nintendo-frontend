@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
+import fatality from "./assets/fatality.mp3"
 
 export function CartedGamesIndex() {
   const [cartedGames, setCartedGames] = useState([])
+  const [mkElement] = useState(new Audio(fatality))
 
   const getCartedGames = () => {
     if (localStorage.jwt === undefined && window.location.href !== "http://localhost:5173/login") {
@@ -15,10 +17,17 @@ export function CartedGamesIndex() {
     }
   }
 
+  const mkAudio = () => {
+    mkElement.play().catch((error) => {
+      console.error("Error playing audio:", error);
+    });
+  };
+
   const handleDeleteGame = async (cartedGameId) => {
     try {
       await axios.delete(`http://localhost:3000/carted_games/${cartedGameId}.json`);
       // Refresh carted games after deletion
+      mkAudio()
       getCartedGames();
     } catch (error) {
       console.error('Error deleting game:', error);
@@ -63,7 +72,7 @@ export function CartedGamesIndex() {
         cartedGames.map(cartedGame => (
           <div key={cartedGame.id} className="cart card">
             <div className="card-body">
-              <img src={cartedGame.game.image} width="150px" height="200px" />
+              <img src={cartedGame.game.image} height="200px" />
               <h3>{cartedGame.game.title}</h3>
               <p>Quantity: {cartedGame.quantity}</p>
               <p>Cost: ${cartedGame.game.price * cartedGame.quantity}</p>

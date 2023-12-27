@@ -27,7 +27,9 @@ export function GamesNew(props) {
             <div className="formgamesprice">
               Price: <input name="price" type="number" />
             </div>
-
+            <div className="formgamesstock">
+              Stock: <input name="stock" type="number" />
+            </div>
 
             <div className="formgamesconsole">
               Console: &nbsp;

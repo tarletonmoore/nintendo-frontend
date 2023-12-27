@@ -4,6 +4,7 @@ import { Footer } from "./Footer";
 import { BrowserRouter } from "react-router-dom";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import BackgroundMusic from "./BackgroundMusic";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({ favorites: [] })
@@ -22,6 +23,8 @@ function App() {
   useEffect(getUserData, [])
   return (
     <div>
+      <BackgroundMusic />
+      <br></br>
       <BrowserRouter>
         <Header currentUser={currentUser} />
         <Content currentUser={currentUser} setCurrentUser={setCurrentUser} />

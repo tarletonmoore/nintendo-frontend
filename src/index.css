@@ -198,3 +198,13 @@ div.gameshow.card {
 .updatebutton {
   background-color: lightgray;
 }
+
+.search {
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
+.boldpcenter {
+  font-weight: bold;
+  text-align: center;
+}

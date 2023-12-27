@@ -6,7 +6,6 @@ export function OrdersShow() {
   const { orderId } = useParams();
   const [order, setOrder] = useState({ carted_games: [] })
 
-  console.log(orderId)
   const getOrderData = () => {
     axios.get(`http://localhost:3000/orders/${orderId}.json`).then(response => {
       setOrder(response.data)

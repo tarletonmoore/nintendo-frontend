@@ -40,6 +40,9 @@ export function Profile(props) {
                   <br></br>
                   <br></br>
                   <p>Price: ${fav.game.price}</p>
+                  {fav.game.stock > 0 ? (<p className="boldp" style={{ color: 'green' }}>In Stock</p>) : (
+                    <p className="boldp" style={{ color: 'red' }}>Out of stock</p>
+                  )}
                   <button onClick={() => { handleDestroyFavorite(fav.id) }} className="removebutton">Remove</button>
                 </div>
               </div>

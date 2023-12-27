@@ -43,7 +43,7 @@ export function ConsolesShow(props) {
       <div className="card-body">
         <h1>Console Info</h1>
         <h2>{console.name}</h2>
-        <img src={console.image} width="200px" height="300px" />
+        <img src={console.image} height="300px" />
         <br></br>
         <br></br>
         <h3>Year Released: {console.year}</h3>

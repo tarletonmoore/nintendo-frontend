@@ -12,7 +12,7 @@ export function ConsolesIndex(props) {
           <div key={console.id} className="col-6">
             <div className="console card">
               <div className="card-body">
-                <img src={console.image} width="150px" height="200px" />
+                <img src={console.image} height="200px" />
                 <br></br>
                 <br></br>
                 <h2>{console.name}</h2>

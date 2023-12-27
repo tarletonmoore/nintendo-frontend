@@ -17,6 +17,9 @@ export function GamesIndex(props) {
                 <h2>{game.title}</h2>
                 <p className="boldp">Price: ${game.price}</p>
                 <p className="boldp">Console: {game.console.name}</p>
+                {game.stock > 0 ? (<p className="boldp" style={{ color: 'green' }}>In Stock</p>) : (
+                  <p className="boldp" style={{ color: 'red' }}>Out of stock</p>
+                )}
                 <Link to={`/games/${game.id}`}>
                   <button>Go To Show Page</button>
                 </Link>

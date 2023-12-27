@@ -175,3 +175,26 @@ div.gameshow.card {
 .boldp {
   font-weight: bold;
 }
+
+.updatetitle {
+  padding-left: 13px;
+  margin-bottom: 20px;
+}
+
+.updateimage {
+  margin-bottom: 20px;
+}
+
+.updateprice {
+  padding-left: 8px;
+  margin-bottom: 20px;
+}
+
+.updatestock {
+  padding-left: 3px;
+  margin-bottom: 20px;
+}
+
+.updatebutton {
+  background-color: lightgray;
+}

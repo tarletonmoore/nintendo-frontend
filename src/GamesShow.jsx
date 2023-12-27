@@ -3,6 +3,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import mario from "./assets/mario.mp3"
 import navi from "./assets/navi.mp3"
+import { GamesUpdate } from "./GamesUpdate";
+import { Modal } from "./Modal";
 
 export function GamesShow(props) {
   const { id } = useParams();
@@ -10,6 +12,7 @@ export function GamesShow(props) {
   const [isFavorited, setIsFavorited] = useState(false)
   const [audioElement] = useState(new Audio(navi))
   const [marioElement] = useState(new Audio(mario))
+  const [isGameUpdateVisible, setIsGameUpdateVisible] = useState(false);
 
   const getGameData = () => {
     if (localStorage.jwt === undefined && window.location.href !== "http://localhost:5173/login") {
@@ -17,12 +20,27 @@ export function GamesShow(props) {
     }
     else {
       axios.get(`http://localhost:3000/games/${id}.json`).then((response) => {
-        console.log(response.data)
         setGame(response.data);
         checkIfFavorited()
       })
     };
   };
+
+  const handleUpdateGame = (id, params) => {
+    axios
+      .patch(`http://localhost:3000/games/${id}.json`, params)
+      .then((response) => {
+        const updatedGameData = response.data;
+
+        setGame(updatedGameData);
+
+        setIsGameUpdateVisible(false);
+      })
+      .catch((error) => {
+        console.error('Error updating game:', error);
+      });
+  };
+
 
   const handleAddToCart = async (event) => {
     event.preventDefault();
@@ -113,6 +131,14 @@ export function GamesShow(props) {
       });
   };
 
+  const handleShowGame = (game) => {
+    setIsGameUpdateVisible(true);
+    setGame(game);
+  };
+
+  const handleClose = () => {
+    setIsGameUpdateVisible(false);
+  };
 
   const handleClick = (review) => {
     handleDestroyReview(review);
@@ -140,19 +166,30 @@ export function GamesShow(props) {
         <div className="moveright">
           <p className="boldp">Price: ${game.price}</p>
           <p className="boldp">Console: {game.console.name}</p>
-          <form onSubmit={handleAddToCart}>
-            <div className="boldp">
-              quantity: <input name="quantity" type="number" defaultValue={1} />
-            </div>
-            <br></br>
-            <p className="boldp">Stock: {game.stock}</p>
-            <div>
-              <input name="game_id" type="hidden" defaultValue={game.id} />
-            </div>
-            <div id="errorMessage" style={{ color: 'red' }}></div>
-            <br />
-            <button>Add to cart</button>
-          </form>
+          {game.stock > 0 ? (
+            <form onSubmit={handleAddToCart}>
+              <div className="boldp">
+                Quantity: <input name="quantity" type="number" defaultValue={1} />
+              </div>
+              <br />
+              <p className="boldp">Stock: {game.stock}</p>
+              <div>
+                <input name="game_id" type="hidden" defaultValue={game.id} />
+              </div>
+              <div id="errorMessage" style={{ color: 'red' }}></div>
+              <br />
+              <button>Add to cart</button>
+            </form>
+          ) : (
+            <p className="boldp" style={{ color: 'red' }}>Out of stock</p>
+          )}
+          <br></br>
+          {props.currentUser.admin ? (
+            <button onClick={() => handleShowGame(game)} >Update Game</button>) : null}
+          <Modal show={isGameUpdateVisible} onClose={handleClose}>
+            <GamesUpdate game={game} onUpdateGame={handleUpdateGame} />
+          </Modal>
+          <br></br>
           <br></br>
           {isFavorited ? (
             <p className="boldp">This game is already in your wishlist</p>

@@ -61,6 +61,10 @@ export function ConsolesShow(props) {
                   <br></br>
                   <br></br>
                   <h3>{game.title}</h3>
+                  <p className="boldp">Price: ${game.price}</p>
+                  {game.stock > 0 ? (<p className="boldp" style={{ color: 'green' }}>In Stock</p>) : (
+                    <p className="boldp" style={{ color: 'red' }}>Out of stock</p>
+                  )}
                   <Link to={`/games/${game.id}`}>
                     <button>Go To Show Page</button>
                   </Link>

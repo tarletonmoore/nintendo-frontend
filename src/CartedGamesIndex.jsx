@@ -42,7 +42,12 @@ export function CartedGamesIndex() {
 
   const tax = subtotalCost * 0.09
 
-  const totalcost = subtotalCost + tax
+  const totalCost = subtotalCost + tax
+
+
+  const formattedSubtotal = subtotalCost.toFixed(2);
+  const formattedTax = tax.toFixed(2);
+  const formattedTotal = totalCost.toFixed(2);
 
 
   const buy = async () => {
@@ -85,9 +90,9 @@ export function CartedGamesIndex() {
       )}
       {cartedGames.length > 0 && (
         <div className="cartedcost">
-          <h4>Subtotal: ${subtotalCost}</h4>
-          <h4>Tax: ${tax}</h4>
-          <h4>Total: ${totalcost}</h4>
+          <h4>Subtotal: ${formattedSubtotal}</h4>
+          <h4>Tax: ${formattedTax}</h4>
+          <h4>Total: ${formattedTotal}</h4>
           <button onClick={buy}>Checkout</button>
         </div>
       )}

@@ -31,7 +31,7 @@ export function Profile(props) {
       <div>
         <h1>Your Wishlist:</h1>
         <div className="row row-col-2">
-          {props.currentUser.favorites.map(fav => (
+          {props.currentUser.favorites.length > 0 ? (props.currentUser.favorites.map(fav => (
             <div key={fav.id} className="col-6">
               <div className="profile card">
                 <div className="card-body">
@@ -47,7 +47,9 @@ export function Profile(props) {
                 </div>
               </div>
             </div>
-          ))}
+          ))) : (
+            <p className="boldpcenter">Nothing In Wishlist</p>
+          )}
         </div>
       </div>
     </div>

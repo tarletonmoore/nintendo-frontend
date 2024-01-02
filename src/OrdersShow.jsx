@@ -21,7 +21,7 @@ export function OrdersShow() {
         <div key={carted_game.id}>
           <div className="order card">
             <div className="card-body">
-              <img src={carted_game.game.image} width="150px" height="200px" />
+              <img src={carted_game.game.image} height="200px" />
               <h2>{carted_game.game.title}</h2>
               <p>Price of Game: ${carted_game.game.price}</p>
               <p>Quantity: {carted_game.quantity}</p>

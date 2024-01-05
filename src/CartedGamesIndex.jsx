@@ -2,6 +2,11 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import fatality from "./assets/fatality.mp3"
 
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+import { Col, ListGroupItem } from "react-bootstrap"
+import Button from "react-bootstrap/Button";
+
 export function CartedGamesIndex() {
   const [cartedGames, setCartedGames] = useState([])
   const [mkElement] = useState(new Audio(fatality))
@@ -72,30 +77,52 @@ export function CartedGamesIndex() {
   useEffect(getCartedGames, [])
   return (
     <div>
-      <h1>Shopping Cart</h1>
       {cartedGames.length > 0 ? (
         cartedGames.map(cartedGame => (
-          <div key={cartedGame.id} className="cart card">
-            <div className="card-body">
-              <img src={cartedGame.game.image} height="200px" />
-              <h3>{cartedGame.game.title}</h3>
-              <p>Quantity: {cartedGame.quantity}</p>
-              <p>Cost: ${cartedGame.game.price * cartedGame.quantity}</p>
-              <button onClick={() => handleDeleteGame(cartedGame.id)}>Remove from Cart</button>
-            </div>
-          </div>
-        ))
-      ) : (
-        <p className="emptycart">Nothing in cart</p>
-      )}
+          < Col key={cartedGame.id} lg={6}>
+
+            <Card
+              className="game card mt-8 card-border"
+              style={{ width: '90%', height: '100%' }}
+            >
+              <Card.Img variant="top" src={cartedGame.game.image}
+                className="mx-auto mt-3"
+                style={{ height: "400px", width: "500px" }}
+              />
+              <Card.Body>
+                <div className="text-center">
+                  <Card.Title style={{ fontSize: '2rem', fontWeight: 'bold' }}>{cartedGame.title}</Card.Title>
+                </div>
+              </Card.Body>
+              <ListGroup className="list-group-flush">
+                <ListGroupItem>Quantity: {cartedGame.quantity}</ListGroupItem>
+
+                <ListGroup.Item className="border-dark">Cost: ${cartedGame.game.price * cartedGame.quantity}</ListGroup.Item>
+
+
+              </ListGroup>
+              <Card.Body>
+                <Button onClick={() => handleDeleteGame(cartedGame.id)}>Remove from Cart</Button>
+              </Card.Body>
+            </Card>
+
+          </Col>
+
+        ))) : (
+
+        <p className="emptycart">Nothing in cart 😢</p>
+
+      )
+      }
       {cartedGames.length > 0 && (
         <div className="cartedcost">
           <h4>Subtotal: ${formattedSubtotal}</h4>
           <h4>Tax: ${formattedTax}</h4>
           <h4>Total: ${formattedTotal}</h4>
-          <button onClick={buy}>Checkout</button>
+          <Button onClick={buy}>Checkout</Button>
         </div>
       )}
     </div>
+
   )
 }

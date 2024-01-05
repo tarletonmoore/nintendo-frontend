@@ -4,6 +4,10 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import banjo from "./assets/banjo.mp3"
 
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Button from "react-bootstrap/Button";
+
 export function ConsolesShow(props) {
   const [console, setConsole] = useState([])
   const [consoleGames, setConsoleGames] = useState([])
@@ -39,41 +43,57 @@ export function ConsolesShow(props) {
   useEffect(getConsoleData, [])
 
   return (
-    <div className="consoleshow card">
-      <div className="card-body">
-        <h1>Console Info</h1>
-        <h2>{console.name}</h2>
-        <img src={console.image} height="300px" />
-        <br></br>
-        <br></br>
-        <h3>Year Released: {console.year}</h3>
-        <br></br>
+
+
+    <Card
+      className="console card mt-8 card-border"
+    >
+      <Card.Img variant="top" src={console.image}
+        className="mx-auto mt-3"
+        style={{ height: "400px", width: "auto" }}
+      />
+      <Card.Body>
+        <div className="text-center">
+          <Card.Title style={{ fontSize: '2rem', fontWeight: 'bold' }}>{console.name}</Card.Title>
+        </div>
+      </Card.Body>
+      <ListGroup className="list-group-flush">
+        <ListGroup.Item className="border-dark">Year Released:   {console.year}</ListGroup.Item>
+      </ListGroup>
+      <Card.Body>
         <h2>Games For The {console.name}</h2>
-        <button onClick={handleConsoleGames}>{showGames ? 'Hide Games' : 'Show Games'}</button>
-        <br></br>
-        <br></br>
+        <Button onClick={handleConsoleGames}>{showGames ? 'Hide Games' : 'Show Games'}</Button>
         {showGames && (
           consoleGames.map(game => (
-            <div key={game.id}>
-              <div className="card">
-                <div className="card-body">
-                  <img src={game.image} height="200px" />
-                  <br></br>
-                  <br></br>
-                  <h3>{game.title}</h3>
-                  <p className="boldp">Price: ${game.price}</p>
-                  {game.stock > 0 ? (<p className="boldp" style={{ color: 'green' }}>In Stock</p>) : (
-                    <p className="boldp" style={{ color: 'red' }}>Out of stock</p>
-                  )}
-                  <Link to={`/games/${game.id}`}>
-                    <button>Go To Show Page</button>
-                  </Link>
+            <Card
+              className="console game card mt-8 card-border"
+              style={{ width: '90%', height: '100%' }}
+            >
+              <Card.Img variant="top" src={game.image}
+                className="mx-auto mt-3"
+                style={{ height: "400px", width: "500px" }}
+              />
+              <Card.Body>
+                <div className="text-center">
+                  <Card.Title style={{ fontSize: '2rem', fontWeight: 'bold' }}>{game.title}</Card.Title>
                 </div>
-              </div>
-            </div>
+              </Card.Body>
+              <ListGroup className="list-group-flush">
+                <ListGroup.Item className="border-dark">Price: ${game.price}</ListGroup.Item>
+
+                <ListGroup.Item className="border-dark">{game.stock > 0 ? (<p className="boldp" style={{ color: 'green' }}>In Stock</p>) : (
+                  <p className="boldp" style={{ color: 'red' }}>Out of stock</p>
+                )}</ListGroup.Item>
+              </ListGroup>
+              <Card.Body>
+                <Link to={`/games/${game.id}`}>
+                  <Button variant="primary" >Go To Show Page</Button>
+                </Link>
+              </Card.Body>
+            </Card>
           ))
         )}
-      </div>
-    </div>
+      </Card.Body>
+    </Card>
   )
 }

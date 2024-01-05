@@ -208,3 +208,24 @@ div.gameshow.card {
   font-weight: bold;
   text-align: center;
 }
+
+div.border-dark.list-group-item {
+  border-color: #000000;
+}
+
+div.game.card.mt-8.card-border {
+  border: 1px solid #000;
+}
+
+div.console.card.mt-8.card-border {
+  border: 1px solid #000;
+}
+
+div.profile.card.mt-8.card-border {
+  border: 1px solid #000;
+}
+
+div.console.game.card.mt-8.card-border {
+  border: 1px solid #000;
+  background-color: darkgrey;
+}

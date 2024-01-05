@@ -81,4 +81,3 @@ export function Profile(props) {
     </div>
   )
 }
-// test contributions are working now on github

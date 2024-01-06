@@ -87,7 +87,7 @@ export function ConsolesShow(props) {
               </ListGroup>
               <Card.Body>
                 <Link to={`/games/${game.id}`}>
-                  <Button variant="primary" >Go To Show Page</Button>
+                  <Button variant="primary" >More Info</Button>
                 </Link>
               </Card.Body>
             </Card>

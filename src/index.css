@@ -22,6 +22,7 @@ nav.navbar-custom {
 li.nav-item {
   background-color: red;
   margin-left: 20px;
+  border-radius: 10px;
 }
 
 h1 {
@@ -118,6 +119,8 @@ div.gameshow.card {
 .emptycart {
   font-weight: bold;
   text-align: center;
+  font-size: 40px;
+  margin-top: 10px;
 }
 
 .login.card {
@@ -196,7 +199,7 @@ div.gameshow.card {
 }
 
 .updatebutton {
-  background-color: lightgray;
+  margin-left: 55px;
 }
 
 .search {
@@ -228,4 +231,40 @@ div.profile.card.mt-8.card-border {
 div.console.game.card.mt-8.card-border {
   border: 1px solid #000;
   background-color: darkgrey;
+}
+
+
+.rightcol {
+  padding-top: 50px;
+  background-color: #FAF9F6;
+  border-radius: 10px;
+}
+
+/* div.border-dark.right.list-group-item {
+  background-color: white;
+
+} */
+
+div.row {
+  margin-right: 1px;
+}
+
+
+.musicbutton {
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
+
+.addtocartbutton {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.emptyfav {
+  font-weight: bold;
+  text-align: center;
+  font-size: 30px;
+  margin-left: 410px;
 }

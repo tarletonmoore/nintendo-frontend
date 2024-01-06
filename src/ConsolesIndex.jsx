@@ -72,7 +72,7 @@ export function ConsolesIndex(props) {
               </ListGroup>
               <Card.Body>
                 <Link to={`/consoles/${console.id}`}>
-                  <Button className="showbutton">Go to show page</Button>
+                  <Button className="showbutton">More Info</Button>
                 </Link>
               </Card.Body>
             </Card>

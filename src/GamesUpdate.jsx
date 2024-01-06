@@ -1,3 +1,4 @@
+import Button from "react-bootstrap/Button"
 
 export function GamesUpdate(props) {
   const handleSubmit = (event) => {
@@ -24,7 +25,7 @@ export function GamesUpdate(props) {
           Stock: <input defaultValue={props.game.stock} name="stock" type="number" />
         </div>
         <br></br>
-        <button type="submit" className="updatebutton">Update Game</button>
+        <Button type="submit" className="updatebutton" variant="light">Update Game</Button>
       </form>
 
     </div>

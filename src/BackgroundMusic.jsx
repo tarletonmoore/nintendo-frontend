@@ -1,6 +1,8 @@
 import React, { useState, useRef } from "react";
 import audio from "./assets/007.mp3";
 
+import Button from "react-bootstrap/Button";
+
 const BackgroundMusic = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(new Audio(audio));
@@ -18,9 +20,9 @@ const BackgroundMusic = () => {
 
   return (
     <div>
-      <button onClick={toggleAudio}>
+      <Button variant="light" onClick={toggleAudio} className="musicbutton">
         {isPlaying ? "Stop Music" : "Play Music"}
-      </button>
+      </Button>
     </div>
   );
 };

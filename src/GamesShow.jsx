@@ -9,7 +9,7 @@ import { Modal } from "./Modal";
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from "react-bootstrap/Button";
-import { CardBody, ListGroupItem, Form, FormGroup, FormControl } from "react-bootstrap";
+import { CardBody, ListGroupItem, Form, FormGroup, FormControl, Row, Col } from "react-bootstrap";
 
 
 export function GamesShow(props) {
@@ -51,11 +51,10 @@ export function GamesShow(props) {
   const handleAddToCart = async (event) => {
     event.preventDefault();
     const quantity = event.target.elements.quantity.value;
-    const gameId = event.target.elements.game_id.value; // Assuming this input holds the game ID
+    const gameId = event.target.elements.game_id.value;
     const errorMessage = document.getElementById('errorMessage');
 
     try {
-      // Fetch the game information, including its stock quantity
       const gameResponse = await axios.get(`http://localhost:3000/games/${gameId}.json`);
       const game = gameResponse.data;
 
@@ -165,78 +164,84 @@ export function GamesShow(props) {
   }
 
   return (
-    <Card
-      className="game card mt-8 card-border"
-      style={{ width: '90%', height: '100%' }}
-    >
-      <Card.Img variant="top" src={game.image}
-        className="mx-auto mt-3"
-        style={{ height: "400px", width: "500px" }}
-      />
-      <Card.Body>
-        <div className="text-center">
-          <Card.Title style={{ fontSize: '2rem', fontWeight: 'bold' }}>{game.title}</Card.Title>
-        </div>
-      </Card.Body>
-      <ListGroup className="list-group-flush">
-        <ListGroup.Item className="border-dark">Price: ${game.price}</ListGroup.Item>
-        <ListGroup.Item className="border-dark">Console: {game.console.name}</ListGroup.Item>
-        <ListGroup.Item className="border-dark">
-          {game.stock > 0 ? (
-            <Form onSubmit={handleAddToCart}>
-              <FormGroup>
-                <Form.Label>Quantity:</Form.Label>
-                <FormControl name="quantity" type="number" defaultValue={1} />
-              </FormGroup>
-              <p className="boldp">Stock: {game.stock}</p>
-              <FormGroup>
-                <FormControl name="game_id" type="hidden" defaultValue={game.id} />
-              </FormGroup>
-              <div id="errorMessage" style={{ color: 'red' }}></div>
-              <Button type="submit">Add to cart</Button>
-            </Form>
-          ) : (
-            <p className="boldp" style={{ color: 'red' }}>Out of stock</p>
-          )}
-        </ListGroup.Item>
-        <ListGroupItem> {props.currentUser.admin ? (
-          <Button onClick={() => handleShowGame(game)} >Update Game</Button>) : null}
-          <Modal show={isGameUpdateVisible} onClose={handleClose}>
-            <GamesUpdate game={game} onUpdateGame={handleUpdateGame} />
-          </Modal></ListGroupItem>
-        <ListGroupItem>
-          {isFavorited ? (
-            <p className="boldp">This game is already in your wishlist</p>
-          ) : (
-            <Form onSubmit={handleAddToFavorites}>
-              <FormGroup>
-                <FormControl name="game_id" type="hidden" defaultValue={game.id} />
-              </FormGroup>
+    <Card className="game card mt-8 card-border" style={{ width: '90%', height: '100%' }}>
+      <Row>
+        <Col xs={8}>
+          <Card.Body>
+            <div className="text-center">
+              <Card.Title style={{ fontSize: '2rem', fontWeight: 'bold' }}>{game.title}</Card.Title>
+            </div>
+          </Card.Body>
+          <Card.Img variant="top" src={game.image} className="mx-auto d-block mt-3" style={{ height: "400px", width: "500px" }} />
 
-              <FormGroup>
-                <FormControl name="user_id" type="hidden" defaultValue={props.currentUser.id} />
-              </FormGroup>
-              <br />
-              <Button type="submit">Add to wishlist</Button>
-            </Form>
-          )}
-        </ListGroupItem>
-      </ListGroup>
+        </Col>
+
+        <Col xs={4} className="rightcol">
+          <ListGroup.Item className="border-dark boldp">Price: ${game.price}</ListGroup.Item>
+          <br></br>
+          <ListGroup.Item className="border-dark boldp">Console: {game.console.name}</ListGroup.Item>
+
+          <ListGroup.Item className="border-dark right p-3">
+            {game.stock > 0 ? (
+              <Form onSubmit={handleAddToCart}>
+                <FormGroup>
+                  <Form.Label className="boldp">Quantity:</Form.Label>
+                  <FormControl style={{ width: '200px', float: "right" }} name="quantity" type="number" defaultValue={1} />
+                </FormGroup>
+                <br />
+                <p className="boldp">Stock: {game.stock}</p>
+                <FormGroup>
+                  <FormControl name="game_id" type="hidden" defaultValue={game.id} />
+                </FormGroup>
+                <div id="errorMessage" style={{ color: 'red' }}></div>
+                <br />
+                <Button className="addtocartbutton" type="submit">Add to cart</Button>
+              </Form>
+            ) : (
+              <p className="boldp" style={{ color: 'red' }}>Out of stock</p>
+            )}
+          </ListGroup.Item>
+
+          <ListGroupItem>
+            {isFavorited ? (
+              <p className="boldp">This game is already in your wishlist</p>
+            ) : (
+              <Form onSubmit={handleAddToFavorites}>
+                <FormGroup>
+                  <FormControl name="game_id" type="hidden" defaultValue={game.id} />
+                </FormGroup>
+
+                <FormGroup>
+                  <FormControl name="user_id" type="hidden" defaultValue={props.currentUser.id} />
+                </FormGroup>
+                <br />
+                <Button type="submit">Add to wishlist</Button>
+              </Form>
+            )}
+          </ListGroupItem>
+          <br></br>
+          <ListGroupItem> {props.currentUser.admin ? (
+            <Button onClick={() => handleShowGame(game)} >Update Game</Button>) : null}
+            <Modal show={isGameUpdateVisible} onClose={handleClose}>
+              <GamesUpdate game={game} onUpdateGame={handleUpdateGame} />
+            </Modal></ListGroupItem>
+        </Col>
+      </Row>
       <Card.Body>
         <h2>Reviews:</h2>
-        <form onSubmit={handleAddReview}>
-          <div>
-            <input name="game_id" type="hidden" defaultValue={game.id} />
-          </div>
-          <div>
-            <input name="user_id" type="hidden" defaultValue={props.currentUser.id} />
-          </div>
-          <div>
-            <input name="review" type="text" defaultValue={game.review} />
-          </div>
+        <Form onSubmit={handleAddReview}>
+          <FormGroup>
+            <FormControl name="game_id" type="hidden" defaultValue={game.id} />
+          </FormGroup>
+          <FormGroup>
+            <FormControl name="user_id" type="hidden" defaultValue={props.currentUser.id} />
+          </FormGroup>
+          <FormGroup>
+            <FormControl style={{ width: '200px' }} name="review" type="text" defaultValue={game.review} />
+          </FormGroup>
           <br />
-          <button>Add review</button>
-        </form>
+          <Button variant="primary" type="submit">Add review</Button>
+        </Form>
       </Card.Body>
       <CardBody>
         {game.reviews.length > 0 ? (
@@ -246,101 +251,16 @@ export function GamesShow(props) {
                 <p>{review.user.name}: {review.review}</p>
                 {review.user.id === props.currentUser.id && (
                   <>
-                    <button onClick={() => handleClick(review)}>Delete Review</button>
+                    <Button variant="light" onClick={() => handleClick(review)}>Delete Review</Button>
                   </>
                 )}
               </div>
             </div>
           ))
         ) : (
-          <p>No reviews yet</p>
+          <p className="boldp">No reviews yet</p>
         )}
       </CardBody>
     </Card>
-
-
-
-    // <div className="gameshow card">
-    //   <div className="card-body">
-    //     <h1>{game.title}</h1>
-    //     <img src={game.image} height="250px" />
-    //     <div className="moveright">
-    //       <p className="boldp">Price: ${game.price}</p>
-    //       <p className="boldp">Console: {game.console.name}</p>
-    //       {game.stock > 0 ? (
-    //         <form onSubmit={handleAddToCart}>
-    //           <div className="boldp">
-    //             Quantity: <input name="quantity" type="number" defaultValue={1} />
-    //           </div>
-    //           <br />
-    //           <p className="boldp">Stock: {game.stock}</p>
-    //           <div>
-    //             <input name="game_id" type="hidden" defaultValue={game.id} />
-    //           </div>
-    //           <div id="errorMessage" style={{ color: 'red' }}></div>
-    //           <br />
-    //           <button>Add to cart</button>
-    //         </form>
-    //       ) : (
-    //         <p className="boldp" style={{ color: 'red' }}>Out of stock</p>
-    //       )}
-    //       <br></br>
-    //       {props.currentUser.admin ? (
-    //         <button onClick={() => handleShowGame(game)} >Update Game</button>) : null}
-    //       <Modal show={isGameUpdateVisible} onClose={handleClose}>
-    //         <GamesUpdate game={game} onUpdateGame={handleUpdateGame} />
-    //       </Modal>
-    //       <br></br>
-    //       <br></br>
-    //       {isFavorited ? (
-    //         <p className="boldp">This game is already in your wishlist</p>
-    //       ) : (
-    //         <form onSubmit={handleAddToFavorites}>
-    //           <div>
-    //             <input name="game_id" type="hidden" defaultValue={game.id} />
-    //           </div>
-    //           <div>
-    //             <input name="user_id" type="hidden" defaultValue={props.currentUser.id} />
-    //           </div>
-    //           <br />
-    //           <button>Add to wishlist</button>
-    //         </form>
-    //       )}
-    //     </div>
-    //     <br></br>
-    //     <br></br>
-    //     <h2>Reviews:</h2>
-    //     <form onSubmit={handleAddReview}>
-    //       <div>
-    //         <input name="game_id" type="hidden" defaultValue={game.id} />
-    //       </div>
-    //       <div>
-    //         <input name="user_id" type="hidden" defaultValue={props.currentUser.id} />
-    //       </div>
-    //       <div>
-    //         <input name="review" type="text" defaultValue={game.review} />
-    //       </div>
-    //       <br />
-    //       <button>Add review</button>
-    //     </form>
-    //     <br></br>
-    //     {game.reviews.length > 0 ? (
-    //       game.reviews.map(review => (
-    //         <div key={review.id} className="review card">
-    //           <div className="card-body">
-    //             <p>{review.user.name}: {review.review}</p>
-    //             {review.user.id === props.currentUser.id && (
-    //               <>
-    //                 <button onClick={() => handleClick(review)}>Delete Review</button>
-    //               </>
-    //             )}
-    //           </div>
-    //         </div>
-    //       ))
-    //     ) : (
-    //       <p>No reviews yet</p>
-    //     )}
-    //   </div>
-    // </div>
   );
 }

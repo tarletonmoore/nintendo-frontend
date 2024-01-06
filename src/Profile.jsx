@@ -70,7 +70,7 @@ export function Profile(props) {
 
             ))) : (
 
-            <p className="boldpcenter">Nothing In Wishlist 😢</p>
+            <p className="emptyfav">Nothing In Wishlist 😢</p>
 
           )
           }

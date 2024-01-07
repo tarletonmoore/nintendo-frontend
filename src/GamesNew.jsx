@@ -1,3 +1,4 @@
+import { Form, Button, Card } from 'react-bootstrap';
 
 
 export function GamesNew(props) {
@@ -13,37 +14,44 @@ export function GamesNew(props) {
   return (
     <div>
       <h1>New Game</h1>
-      <div className="console card">
-        <div className="card-body">
-          <form onSubmit={handleSubmit}>
-            <div className="formgamestitle">
-              Title: <input name="title" type="text" />
-            </div>
+      <Card className="console">
+        <Card.Body>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className='mb-3'>
+              <Form.Label>Title:</Form.Label>
+              <Form.Control type="text" name="title" placeholder="Enter game title" style={{ width: '300px' }} />
+            </Form.Group>
 
-            <div className="formgamesimage">
-              Image: <input name="image" type="text" />
-            </div>
+            <Form.Group className='mb-3'>
+              <Form.Label>Image:</Form.Label>
+              <Form.Control type="text" name="image" placeholder="Enter game image URL" style={{ width: '300px' }} />
+            </Form.Group>
 
-            <div className="formgamesprice">
-              Price: <input name="price" type="number" />
-            </div>
-            <div className="formgamesstock">
-              Stock: <input name="stock" type="number" />
-            </div>
+            <Form.Group className='mb-3'>
+              <Form.Label>Price:</Form.Label>
+              <Form.Control type="number" name="price" placeholder="Enter game price" style={{ width: '300px' }} />
+            </Form.Group>
 
-            <div className="formgamesconsole">
-              Console: &nbsp;
-              <select name="console_id">
+            <Form.Group className='mb-3'>
+              <Form.Label>Stock:</Form.Label>
+              <Form.Control type="number" name="stock" placeholder="Enter game stock" style={{ width: '300px' }} />
+            </Form.Group>
+            <Form.Group className='mb-3'>
+              <Form.Label>Console:</Form.Label>
+              <Form.Control as="select" name="console_id" style={{ width: '300px' }}>
                 {props.consoles.map(console => (
-                  <option value={console.id}>{console.name}</option>
+                  <option key={console.id} value={console.id}>{console.name}</option>
                 ))}
-
-              </select>
-            </div>
-            <button type="submit" className="formgamesbutton">Create game</button>
-          </form>
-        </div>
-      </div>
+              </Form.Control>
+            </Form.Group>
+            <br></br>
+            <Button variant="primary" type="submit" className="formgamesbutton">
+              Create game
+            </Button>
+          </Form>
+        </Card.Body>
+      </Card>
     </div>
+
   );
 }

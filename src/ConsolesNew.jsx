@@ -1,4 +1,4 @@
-
+import { Form, Button, Card } from 'react-bootstrap';
 
 export function ConsolesNew(props) {
 
@@ -12,27 +12,34 @@ export function ConsolesNew(props) {
 
   return (
     <div>
-      <h1>New Product</h1>
-      <div className="console card">
-        <div className="card-body">
-          <form onSubmit={handleSubmit}>
-            <div className="formconsolename">
-              Name: <input name="name" type="text" />
-            </div>
+      <h1>New Console</h1>
+      <Card className="console">
+        <Card.Body>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3">
+              <Form.Label>Name:</Form.Label>
+              <Form.Control type="text" name="name" placeholder="Enter console name"
+                style={{ width: '300px' }}
+              />
+            </Form.Group>
 
-            <div className="formconsoleimage">
-              Image: <input name="image" type="text" />
-            </div>
-            <div>
-              Year Released: <input name="year" type="text" />
-            </div>
+            <Form.Group className="mb-3" >
+              <Form.Label>Image:</Form.Label>
+              <Form.Control type="text" name="image" placeholder="Enter console image URL" style={{ width: '300px' }} />
+            </Form.Group>
 
+            <Form.Group className="mb-3">
+              <Form.Label>Year Released:</Form.Label>
+              <Form.Control type="text" name="year" placeholder="Enter year released" style={{ width: '300px' }} />
+            </Form.Group>
 
-
-            <button type="submit" className="formbutton">Create console</button>
-          </form>
-        </div>
-      </div>
+            <Button variant="primary" type="submit" className="formbutton">
+              Create console
+            </Button>
+          </Form>
+        </Card.Body>
+      </Card>
     </div>
+
   );
 }

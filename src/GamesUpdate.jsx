@@ -1,4 +1,4 @@
-import Button from "react-bootstrap/Button"
+import { Form, Button } from 'react-bootstrap';
 
 export function GamesUpdate(props) {
   const handleSubmit = (event) => {
@@ -11,22 +11,31 @@ export function GamesUpdate(props) {
 
   return (
     <div>
-      <form onSubmit={handleSubmit} className="updateform">
-        <div className="updatetitle">
-          Title: <input defaultValue={props.game.title} name="title" type="text" />
-        </div>
-        <div className="updateimage">
-          Image: <input defaultValue={props.game.image} name="image" type="text" />
-        </div>
-        <div className="updateprice">
-          Price: <input defaultValue={props.game.price} name="price" type="number" />
-        </div>
-        <div className="updatestock">
-          Stock: <input defaultValue={props.game.stock} name="stock" type="number" />
-        </div>
+      <Form onSubmit={handleSubmit} className="updateform">
+        <Form.Group className='mb-3'>
+          <Form.Label>Title:</Form.Label>
+          <Form.Control type="text" name="title" defaultValue={props.game.title} style={{ width: '300px' }} />
+        </Form.Group>
+
+        <Form.Group className='mb-3'>
+          <Form.Label>Image:</Form.Label>
+          <Form.Control type="text" name="image" defaultValue={props.game.image} style={{ width: '300px' }} />
+        </Form.Group>
+
+        <Form.Group className='mb-3'>
+          <Form.Label>Price:</Form.Label>
+          <Form.Control type="number" name="price" defaultValue={props.game.price} style={{ width: '300px' }} />
+        </Form.Group>
+
+        <Form.Group className='mb-3'>
+          <Form.Label>Stock:</Form.Label>
+          <Form.Control type="number" name="stock" defaultValue={props.game.stock} style={{ width: '300px' }} />
+        </Form.Group>
         <br></br>
-        <Button type="submit" className="updatebutton" variant="light">Update Game</Button>
-      </form>
+        <Button type="submit" className="updatebutton" variant="light">
+          Update Game
+        </Button>
+      </Form>
 
     </div>
   )

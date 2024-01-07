@@ -177,54 +177,62 @@ export function GamesShow(props) {
         </Col>
 
         <Col xs={4} className="rightcol">
-          <ListGroup.Item className="border-dark boldp">Price: ${game.price}</ListGroup.Item>
-          <br></br>
-          <ListGroup.Item className="border-dark boldp">Console: {game.console.name}</ListGroup.Item>
+          <ListGroup className="list-group-flush">
+            <ListGroup.Item className="border-dark boldp">Price: ${game.price}</ListGroup.Item>
+            <br></br>
+            <ListGroup.Item className="border-dark boldp">Console: {game.console.name}</ListGroup.Item>
 
-          <ListGroup.Item className="border-dark right p-3">
-            {game.stock > 0 ? (
-              <Form onSubmit={handleAddToCart}>
-                <FormGroup>
-                  <Form.Label className="boldp">Quantity:</Form.Label>
-                  <FormControl style={{ width: '200px', float: "right" }} name="quantity" type="number" defaultValue={1} />
-                </FormGroup>
-                <br />
-                <p className="boldp">Stock: {game.stock}</p>
-                <FormGroup>
-                  <FormControl name="game_id" type="hidden" defaultValue={game.id} />
-                </FormGroup>
-                <div id="errorMessage" style={{ color: 'red' }}></div>
-                <br />
-                <Button className="addtocartbutton" type="submit">Add to cart</Button>
-              </Form>
-            ) : (
-              <p className="boldp" style={{ color: 'red' }}>Out of stock</p>
-            )}
-          </ListGroup.Item>
+            <ListGroup.Item className="border-dark right p-3">
+              {game.stock > 0 ? (
+                <Form onSubmit={handleAddToCart}>
 
-          <ListGroupItem>
-            {isFavorited ? (
-              <p className="boldp">This game is already in your wishlist</p>
-            ) : (
-              <Form onSubmit={handleAddToFavorites}>
-                <FormGroup>
-                  <FormControl name="game_id" type="hidden" defaultValue={game.id} />
-                </FormGroup>
+                  <FormGroup>
+                    <Form.Label className="boldp">Quantity:</Form.Label>
+                    <Form.Control as="select" style={{ width: '200px', float: "right" }} name="quantity" defaultValue={1}>
+                      {[...Array(game.stock).keys()].map((value, index) => (
+                        <option key={index + 1} value={index + 1}>{index + 1}</option>
+                      ))}
+                    </Form.Control>
+                  </FormGroup>
 
-                <FormGroup>
-                  <FormControl name="user_id" type="hidden" defaultValue={props.currentUser.id} />
-                </FormGroup>
-                <br />
-                <Button type="submit">Add to wishlist</Button>
-              </Form>
-            )}
-          </ListGroupItem>
-          <br></br>
-          <ListGroupItem> {props.currentUser.admin ? (
-            <Button onClick={() => handleShowGame(game)} >Update Game</Button>) : null}
-            <Modal show={isGameUpdateVisible} onClose={handleClose}>
-              <GamesUpdate game={game} onUpdateGame={handleUpdateGame} />
-            </Modal></ListGroupItem>
+                  <br />
+                  <p className="boldp">Stock: {game.stock}</p>
+                  <FormGroup>
+                    <FormControl name="game_id" type="hidden" defaultValue={game.id} />
+                  </FormGroup>
+                  <div id="errorMessage" style={{ color: 'red' }}></div>
+                  <br />
+                  <Button className="addtocartbutton" type="submit">Add to cart</Button>
+                </Form>
+              ) : (
+                <p className="boldp" style={{ color: 'red' }}>Out of stock</p>
+              )}
+            </ListGroup.Item>
+
+            <ListGroupItem>
+              {isFavorited ? (
+                <p className="boldp">This game is already in your wishlist</p>
+              ) : (
+                <Form onSubmit={handleAddToFavorites}>
+                  <FormGroup>
+                    <FormControl name="game_id" type="hidden" defaultValue={game.id} />
+                  </FormGroup>
+
+                  <FormGroup>
+                    <FormControl name="user_id" type="hidden" defaultValue={props.currentUser.id} />
+                  </FormGroup>
+                  <br />
+                  <Button type="submit">Add to wishlist</Button>
+                </Form>
+              )}
+            </ListGroupItem>
+            <br></br>
+            <ListGroupItem> {props.currentUser.admin ? (
+              <Button onClick={() => handleShowGame(game)} >Update Game</Button>) : null}
+              <Modal show={isGameUpdateVisible} onClose={handleClose}>
+                <GamesUpdate game={game} onUpdateGame={handleUpdateGame} />
+              </Modal></ListGroupItem>
+          </ListGroup>
         </Col>
       </Row>
       <Card.Body>
@@ -245,7 +253,7 @@ export function GamesShow(props) {
       </Card.Body>
       <CardBody>
         {game.reviews.length > 0 ? (
-          game.reviews.map(review => (
+          game.reviews.slice().reverse().map(review => (
             <div key={review.id} className="review card">
               <div className="card-body">
                 <p>{review.user.name}: {review.review}</p>
@@ -260,6 +268,7 @@ export function GamesShow(props) {
         ) : (
           <p className="boldp">No reviews yet</p>
         )}
+
       </CardBody>
     </Card>
   );

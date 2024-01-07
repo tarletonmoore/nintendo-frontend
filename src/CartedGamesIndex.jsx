@@ -116,10 +116,15 @@ export function CartedGamesIndex() {
       }
       {cartedGames.length > 0 && (
         <div className="cartedcost">
-          <h4>Subtotal: ${formattedSubtotal}</h4>
-          <h4>Tax: ${formattedTax}</h4>
-          <h4>Total: ${formattedTotal}</h4>
-          <Button onClick={buy}>Checkout</Button>
+          <ListGroup className="list-group-flush" style={{ width: "600px" }} >
+            <ListGroupItem className="boldp">Subtotal: ${formattedSubtotal}</ListGroupItem>
+            <ListGroupItem className="boldp">Tax: ${formattedTax}</ListGroupItem>
+            <ListGroupItem className="boldp">Total: ${formattedTotal}</ListGroupItem>
+            <ListGroupItem className="d-flex justify-content-center">
+              <Button onClick={buy} style={{ width: "200px" }}>Checkout</Button>
+            </ListGroupItem>
+          </ListGroup>
+
         </div>
       )}
     </div>

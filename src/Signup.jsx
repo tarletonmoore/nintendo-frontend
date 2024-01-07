@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
+import { Form, Button, Card, Alert } from 'react-bootstrap';
+
 
 export function Signup() {
   const [errors, setErrors] = useState([]);
@@ -23,32 +25,45 @@ export function Signup() {
 
   return (
     <div id="signup">
-      <div className=" signup card">
-        <div className="card-body">
+      <Card className="signup card">
+        <Card.Body>
           <h1 className="signup">Signup</h1>
-          <ul>
-            {errors.map((error) => (
-              <li key={error}>{error}</li>
-            ))}
-          </ul>
-          <form onSubmit={handleSubmit}>
-            <div>
-              <p className="signupname"> Name: <input name="name" type="text" /></p>
-            </div>
+          {errors.length > 0 && (
+            <Alert variant="danger">
+              <ul>
+                {errors.map((error, index) => (
+                  <li key={index}>{error}</li>
+                ))}
+              </ul>
+            </Alert>
+          )}
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3">
+              <Form.Label>Name:</Form.Label>
+              <Form.Control type="text" name="name" placeholder="Enter your name" style={{ width: "300px" }} />
+            </Form.Group>
 
-            <div>
-              <p className="signupemail">Email: <input name="email" type="email" /></p>
-            </div>
-            <div>
-              <p className="signuppass">Password: <input name="password" type="password" /></p>
-            </div>
-            <div>
-              <p> Password confirmation: <input name="password_confirmation" type="password" /></p>
-            </div>
-            <button type="submit" style={{ "backgroundColor": "white" }} className="signupbutton">Signup</button>
-          </form>
-        </div>
-      </div>
+            <Form.Group className="mb-3">
+              <Form.Label>Email:</Form.Label>
+              <Form.Control type="email" name="email" placeholder="Enter your email" style={{ width: "300px" }} />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Password:</Form.Label>
+              <Form.Control type="password" name="password" placeholder="Enter your password" style={{ width: "300px" }} />
+            </Form.Group>
+
+            <Form.Group className="mb-3">
+              <Form.Label>Password Confirmation:</Form.Label>
+              <Form.Control type="password" name="password_confirmation" placeholder="Confirm your password" style={{ width: "300px" }} />
+            </Form.Group>
+
+            <Button type="submit" variant="primary" className="signupbutton">
+              Signup
+            </Button>
+          </Form>
+        </Card.Body>
+      </Card>
     </div>
   );
 }

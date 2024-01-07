@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
+import { Form, Button, Card, Alert } from 'react-bootstrap';
+
 
 const jwt = localStorage.getItem("jwt");
 if (jwt) {
@@ -30,30 +32,37 @@ export function Login() {
 
   return (
     <div id="login">
-      <div className="login card">
-        <div className="card-body">
+      <Card className="login card">
+        <Card.Body>
           <h1 className="login">Login</h1>
-          <ul>
-            {errors.map((error) => (
-              <li key={error}>{error}</li>
-            ))}
-          </ul>
+          {errors.length > 0 && (
+            <Alert variant="danger">
+              <ul>
+                {errors.map((error, index) => (
+                  <li key={index}>{error}</li>
+                ))}
+              </ul>
+            </Alert>
+          )}
           <div className="login-container">
-            <form onSubmit={handleSubmit} >
-              <div>
-                <p className="loginemail"> Email: <input name="email" type="email" /></p>
-              </div>
-              <div>
-                <p> Password: <input name="password" type="password" /></p>
-              </div>
-              <button type="submit" style={{ "backgroundColor": "white" }}>Login</button>
-            </form>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group className="mb-3">
+                <Form.Label>Email:</Form.Label>
+                <Form.Control type="email" name="email" placeholder="Enter your email" style={{ width: '300px' }} />
+              </Form.Group>
 
+              <Form.Group className="mb-3">
+                <Form.Label>Password:</Form.Label>
+                <Form.Control type="password" name="password" placeholder="Enter your password" style={{ width: '300px' }} />
+              </Form.Group>
 
-
+              <Button type="submit" variant="primary">
+                Login
+              </Button>
+            </Form>
           </div>
-        </div>
-      </div>
+        </Card.Body>
+      </Card>
     </div>
   );
 }

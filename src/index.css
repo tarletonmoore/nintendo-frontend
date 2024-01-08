@@ -268,3 +268,51 @@ div.row {
   font-size: 30px;
   margin-left: 410px;
 }
+
+@media (max-width: 767px) {
+  .game.card {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .game.card .row {
+    display: block;
+  }
+
+  .game.card .card-img-top {
+    max-width: 115%;
+
+  }
+
+  div.rightcol.col-4 {
+    margin-left: 15px;
+    width: 300px;
+  }
+
+  li.nav-item {
+    margin-top: 10px;
+    width: 50%;
+    text-align: center;
+  }
+
+  img.card-img-top.mx-auto.mt-3 {
+    max-width: 100%;
+
+  }
+
+  div.boldp.list-group-item {
+    margin-left: 8px;
+    width: 60%;
+  }
+
+  div.d-flex.justify-content-center.list-group-item {
+    width: 60%;
+    margin-left: 8px;
+  }
+
+  button.navbar-toggler.collapsed {
+    color: black;
+    background-color: red;
+  }
+}

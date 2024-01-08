@@ -188,7 +188,7 @@ export function GamesShow(props) {
 
                   <FormGroup>
                     <Form.Label className="boldp">Quantity:</Form.Label>
-                    <Form.Control as="select" style={{ width: '200px', float: "right" }} name="quantity" defaultValue={1}>
+                    <Form.Control className="quantity" as="select" style={{ width: '200px', float: "right" }} name="quantity" defaultValue={1}>
                       {[...Array(game.stock).keys()].map((value, index) => (
                         <option key={index + 1} value={index + 1}>{index + 1}</option>
                       ))}
@@ -196,6 +196,7 @@ export function GamesShow(props) {
                   </FormGroup>
 
                   <br />
+                  <br></br>
                   <p className="boldp">Stock: {game.stock}</p>
                   <FormGroup>
                     <FormControl name="game_id" type="hidden" defaultValue={game.id} />

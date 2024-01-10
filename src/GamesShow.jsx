@@ -5,6 +5,9 @@ import mario from "./assets/mario.mp3"
 import navi from "./assets/navi.mp3"
 import { GamesUpdate } from "./GamesUpdate";
 import { Modal } from "./Modal";
+import cartSvg from './assets/cart.svg';
+
+
 
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -203,7 +206,11 @@ export function GamesShow(props) {
                   </FormGroup>
                   <div id="errorMessage" style={{ color: 'red' }}></div>
                   <br />
-                  <Button className="addtocartbutton" type="submit">Add to cart</Button>
+                  {/* <Button className="addtocartbutton" type="submit">Add to cart</Button> */}
+                  <Button className="addtocartbutton" type="submit" style={{ display: 'flex', alignItems: 'center' }}>
+                    <img src={cartSvg} alt="Cart Icon" style={{ marginRight: "8px", width: "20px", height: "20px", backgroundColor: "white" }} />
+                    <span style={{ flexGrow: 1, textAlign: 'center' }}>Add to cart</span>
+                  </Button>
                 </Form>
               ) : (
                 <p className="boldp" style={{ color: 'red' }}>Out of stock</p>

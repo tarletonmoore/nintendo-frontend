@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 import Carousel from 'react-bootstrap/Carousel';
 import nes from "./assets/nes.webp"
-import snes from "./assets/snes.jpeg"
+import snes from "./assets/supernes.png"
 import n64 from "./assets/n64.jpeg"
 import gamecube from "./assets/gamecube.jpeg"
 import Card from 'react-bootstrap/Card';
@@ -16,23 +16,31 @@ export function ConsolesIndex(props) {
 
   return (
     <div>
-      <Carousel>
-        <Carousel.Item interval={2000}>
-          <img src={nes} height="500px" width="100%" />
-          <Carousel.Caption>
-            <h3 style={{ color: 'black' }}>NES</h3>
+      <Carousel
+        style={{ backgroundColor: "white" }}
+      >
+        <Carousel.Item interval={2000} >
+          <img src={nes}
+            height="500px"
+            style={{ marginLeft: "220px" }}
+          />
+          <Carousel.Caption style={{ marginLeft: "200px" }}>
+            <h3 style={{ color: 'black' }} >NES</h3>
 
           </Carousel.Caption>
         </Carousel.Item>
-        <Carousel.Item interval={2000}>
-          <img src={snes} height="500px" width="100%" />
 
-          <Carousel.Caption>
+        <Carousel.Item interval={2000}>
+          <img src={snes} height="500px"
+            style={{ marginLeft: "100px" }} />
+
+          <Carousel.Caption style={{ marginLeft: "100px" }}>
             <h3 style={{ color: 'black' }}>SNES</h3>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item interval={2000}>
-          <img src={n64} height="500px" width="100%" />
+          <img src={n64} height="500px"
+          />
 
           <Carousel.Caption>
             <h3 style={{ color: 'black' }}>N64</h3>
@@ -40,9 +48,10 @@ export function ConsolesIndex(props) {
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item interval={2000}>
-          <img src={gamecube} height="500px" width="100%" />
+          <img src={gamecube} height="500px"
+            style={{ marginLeft: "150px" }} />
 
-          <Carousel.Caption>
+          <Carousel.Caption style={{ marginLeft: "100px" }}>
             <h3 style={{ color: 'black' }}>GameCube</h3>
 
           </Carousel.Caption>

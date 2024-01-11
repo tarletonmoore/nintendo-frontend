@@ -208,7 +208,9 @@ export function GamesShow(props) {
                   <br />
                   {/* <Button className="addtocartbutton" type="submit">Add to cart</Button> */}
                   <Button className="addtocartbutton" type="submit" style={{ display: 'flex', alignItems: 'center' }}>
-                    <img src={cartSvg} alt="Cart Icon" style={{ marginRight: "8px", width: "20px", height: "20px", backgroundColor: "white" }} />
+                    <img src={cartSvg} alt="Cart Icon" style={{
+                      marginRight: "8px", width: "20px", height: "20px", backgroundColor: "white"
+                    }} />
                     <span style={{ flexGrow: 1, textAlign: 'center' }}>Add to cart</span>
                   </Button>
                 </Form>

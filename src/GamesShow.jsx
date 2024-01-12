@@ -5,7 +5,7 @@ import mario from "./assets/mario.mp3"
 import navi from "./assets/navi.mp3"
 import { GamesUpdate } from "./GamesUpdate";
 import { Modal } from "./Modal";
-import cartSvg from './assets/cart.svg';
+import cartSvg from './assets/cart.png';
 
 
 
@@ -209,7 +209,7 @@ export function GamesShow(props) {
                   {/* <Button className="addtocartbutton" type="submit">Add to cart</Button> */}
                   <Button className="addtocartbutton" type="submit" style={{ display: 'flex', alignItems: 'center' }}>
                     <img src={cartSvg} alt="Cart Icon" style={{
-                      marginRight: "8px", width: "20px", height: "20px", backgroundColor: "white"
+                      marginRight: "8px", width: "20px", height: "20px"
                     }} />
                     <span style={{ flexGrow: 1, textAlign: 'center' }}>Add to cart</span>
                   </Button>

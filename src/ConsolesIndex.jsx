@@ -24,7 +24,7 @@ export function ConsolesIndex(props) {
             height="500px"
             style={{ marginLeft: "220px" }}
           />
-          <Carousel.Caption style={{ marginLeft: "200px" }}>
+          <Carousel.Caption>
             <h3 style={{ color: 'black' }} >NES</h3>
 
           </Carousel.Caption>
@@ -34,7 +34,7 @@ export function ConsolesIndex(props) {
           <img src={snes} height="500px"
             style={{ marginLeft: "100px" }} />
 
-          <Carousel.Caption style={{ marginLeft: "100px" }}>
+          <Carousel.Caption style={{ marginLeft: "5px" }}>
             <h3 style={{ color: 'black' }}>SNES</h3>
           </Carousel.Caption>
         </Carousel.Item>
@@ -51,7 +51,7 @@ export function ConsolesIndex(props) {
           <img src={gamecube} height="500px"
             style={{ marginLeft: "150px" }} />
 
-          <Carousel.Caption style={{ marginLeft: "100px" }}>
+          <Carousel.Caption style={{ marginLeft: "10px" }}>
             <h3 style={{ color: 'black' }}>GameCube</h3>
 
           </Carousel.Caption>

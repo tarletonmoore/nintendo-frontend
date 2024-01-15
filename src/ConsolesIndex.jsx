@@ -58,6 +58,7 @@ export function ConsolesIndex(props) {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel >
+      <br></br>
       < h1 > Consoles</h1 >
       <Row xs={1} md={2} className="g-4">
         {props.consoles.map(console => (

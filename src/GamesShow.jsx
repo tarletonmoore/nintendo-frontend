@@ -58,19 +58,29 @@ export function GamesShow(props) {
     const errorMessage = document.getElementById('errorMessage');
 
     try {
-      const gameResponse = await axios.get(`http://localhost:3000/games/${gameId}.json`);
-      const game = gameResponse.data;
+      const cartResponse = await axios.get("http://localhost:3000/carted_games.json");
 
-      if (quantity <= 0 || quantity > game.stock) {
-        errorMessage.innerText = 'Invalid quantity or insufficient stock.';
+      const cartItem = cartResponse.data.find((item) => item.game_id === parseInt(gameId, 10));
+
+      if (cartItem) {
+        // Game is already in the cart, update the quantity
+        const updatedQuantity = cartItem.quantity + parseInt(quantity, 10);
+        await axios.patch(`http://localhost:3000/carted_games/${cartItem.id}.json`, { quantity: updatedQuantity });
       } else {
+        // Game is not in the cart, add a new entry
+        if (parseInt(quantity, 10) <= 0) {
+          errorMessage.innerText = 'Invalid quantity.';
+          return;
+        }
+
         errorMessage.innerText = ''; // Clear error message if no error
         const params = new FormData(event.target);
 
         console.log('Adding to cart');
         await axios.post("http://localhost:3000/carted_games.json", params);
-        window.location.href = '/carted_games';
       }
+
+      window.location.href = '/carted_games';
     } catch (error) {
       console.error('Error:', error);
     }
@@ -206,7 +216,6 @@ export function GamesShow(props) {
                   </FormGroup>
                   <div id="errorMessage" style={{ color: 'red' }}></div>
                   <br />
-                  {/* <Button className="addtocartbutton" type="submit">Add to cart</Button> */}
                   <Button className="addtocartbutton" type="submit" style={{ display: 'flex', alignItems: 'center' }}>
                     <img src={cartSvg} alt="Cart Icon" style={{
                       marginRight: "8px", width: "20px", height: "20px"

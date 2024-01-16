@@ -154,7 +154,7 @@ div.gameshow.card {
 
 .cartedcost {
   padding-top: 10px;
-  padding-left: 20px;
+  padding-left: 10px;
 }
 
 .cart.card {
@@ -166,9 +166,9 @@ div.gameshow.card {
 }
 
 .order.cost {
-  /* background-color: lightgray; */
+  /* margin-left: 400px; */
   padding-top: 10px;
-  padding-left: 20px;
+  padding-left: 10px;
 }
 
 .profile.card {

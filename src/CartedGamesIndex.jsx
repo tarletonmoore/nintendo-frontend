@@ -116,7 +116,7 @@ export function CartedGamesIndex() {
       }
       {cartedGames.length > 0 && (
         <div className="cartedcost">
-          <ListGroup className="list-group-flush" style={{ width: "600px" }} >
+          <ListGroup className="list-group-flush" style={{ width: "720px" }} >
             <ListGroupItem className="boldp">Subtotal: ${formattedSubtotal}</ListGroupItem>
             <ListGroupItem className="boldp">Tax: ${formattedTax}</ListGroupItem>
             <ListGroupItem className="boldp">Total: ${formattedTotal}</ListGroupItem>

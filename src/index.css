@@ -316,3 +316,10 @@ div.row {
     background-color: red;
   }
 }
+
+.nomatch {
+  font-weight: bold;
+  font-size: 150%;
+  margin-left: 580px;
+  padding-top: 10px;
+}

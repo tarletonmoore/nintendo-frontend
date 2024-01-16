@@ -67,7 +67,7 @@ export function GamesIndex(props) {
 
           ))) : (
 
-          <p className="boldpcenter">No games match the selected criteria. 😢</p>
+          <p className="nomatch">No games match the selected criteria. 😢</p>
 
         )
         }

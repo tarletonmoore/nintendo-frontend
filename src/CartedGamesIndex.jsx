@@ -6,10 +6,12 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { Col, ListGroupItem } from "react-bootstrap"
 import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal"
 
 export function CartedGamesIndex() {
   const [cartedGames, setCartedGames] = useState([])
   const [mkElement] = useState(new Audio(fatality))
+  const [showAlert, setShowAlert] = useState(false);
 
   const getCartedGames = () => {
     if (localStorage.jwt === undefined && window.location.href !== "http://localhost:5173/login") {
@@ -57,10 +59,20 @@ export function CartedGamesIndex() {
 
   const buy = async () => {
     try {
-      const response = await axios.post("http://localhost:3000/orders.json");
-      console.log('Response data:', response.data); // Check the response data
+      // Check if any carted game has a quantity greater than its stock
+      const invalidCartedGames = cartedGames.filter(cartedGame => cartedGame.quantity > cartedGame.game.stock);
 
-      const orderId = response.data.id; // Assuming the ID is returned upon creation
+      if (invalidCartedGames.length > 0) {
+        // Show the alert if there are invalid carted games
+        setShowAlert(true);
+        return;
+      }
+
+      // Proceed with the purchase
+      const response = await axios.post("http://localhost:3000/orders.json");
+      console.log('Response data:', response.data);
+
+      const orderId = response.data.id;
       if (orderId) {
         // Redirect to the order show page with the obtained orderId
         window.location.href = `/orders/${orderId}`;
@@ -72,7 +84,8 @@ export function CartedGamesIndex() {
       console.error('Error during purchase:', error);
       // Handle errors if the purchase fails
     }
-  }
+  };
+
 
   useEffect(getCartedGames, [])
   return (
@@ -127,6 +140,20 @@ export function CartedGamesIndex() {
 
         </div>
       )}
+
+      <Modal show={showAlert} onHide={() => setShowAlert(false)}>
+        <Modal.Header closeButton style={{ backgroundColor: '#dc3545', color: 'white' }}>
+          <Modal.Title>Alert</Modal.Title>
+        </Modal.Header>
+        <Modal.Body style={{ backgroundColor: '#dc3545', color: 'white' }}>
+          Some items in your cart have quantities exceeding stock. Please update your cart.
+        </Modal.Body>
+        <Modal.Footer style={{ backgroundColor: '#dc3545', color: 'white' }}>
+          <Button variant="secondary" onClick={() => setShowAlert(false)}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
 
   )

@@ -53,23 +53,29 @@ export function GamesShow(props) {
 
   const handleAddToCart = async (event) => {
     event.preventDefault();
-    const quantity = event.target.elements.quantity.value;
-    const gameId = event.target.elements.game_id.value;
+    const quantity = parseInt(event.target.elements.quantity.value, 10);
+    const gameId = parseInt(event.target.elements.game_id.value, 10);
     const errorMessage = document.getElementById('errorMessage');
 
     try {
       const cartResponse = await axios.get("http://localhost:3000/carted_games.json");
-
-      const cartItem = cartResponse.data.find((item) => item.game_id === parseInt(gameId, 10));
+      const cartItem = cartResponse.data.find((item) => item.game_id === gameId);
 
       if (cartItem) {
         // Game is already in the cart, update the quantity
-        const updatedQuantity = cartItem.quantity + parseInt(quantity, 10);
+        const updatedQuantity = cartItem.quantity + quantity;
+
+        // Check if the updated quantity exceeds the stock
+        if (updatedQuantity > cartItem.game.stock) {
+          errorMessage.innerText = 'Quantity exceeds available stock.';
+          return;
+        }
+
         await axios.patch(`http://localhost:3000/carted_games/${cartItem.id}.json`, { quantity: updatedQuantity });
       } else {
         // Game is not in the cart, add a new entry
-        if (parseInt(quantity, 10) <= 0) {
-          errorMessage.innerText = 'Invalid quantity.';
+        if (quantity <= 0 || quantity > game.stock) {
+          errorMessage.innerText = 'Invalid quantity or exceeds available stock.';
           return;
         }
 
@@ -85,6 +91,7 @@ export function GamesShow(props) {
       console.error('Error:', error);
     }
   };
+
 
 
   const handleAddToFavorites = (event) => {

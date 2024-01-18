@@ -28,7 +28,7 @@ export function GamesIndex(props) {
           list="title"
         />
       </div>
-      <h1>Games</h1>
+      <h1 style={{ marginRight: "60px" }}>Games</h1>
 
       <Row xs={1} md={2} className="g-4">
         {filteredGames.length > 0 ? (

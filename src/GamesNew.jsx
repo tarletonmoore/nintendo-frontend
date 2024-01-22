@@ -45,7 +45,6 @@ export function GamesNew(props) {
                   ))}
                 </Form.Control>
               </Form.Group>
-              <br></br>
               <Button variant="primary" type="submit" className="formgamesbutton">
                 Create game
               </Button>

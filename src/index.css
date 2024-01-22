@@ -62,8 +62,7 @@ div.review.card {
 
 .formbutton {
   margin-top: 10px;
-  margin-left: 130px;
-  background-color: darkgray;
+  margin-left: 80px;
 }
 
 .formgamestitle {
@@ -95,8 +94,8 @@ div.review.card {
 }
 
 .formgamesbutton {
-  margin-left: 120px;
-  background-color: darkgray;
+  margin-left: 90px;
+  margin-bottom: 10px;
 }
 
 div.console.card {

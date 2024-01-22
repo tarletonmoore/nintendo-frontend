@@ -14,7 +14,7 @@ export function ConsolesNew(props) {
     <div >
       <h1>New Console</h1>
       <div className="d-flex justify-content-center align-items-center">
-        <Card className="console" style={{ width: '400px' }}>
+        <Card className="console" >
           <Card.Body>
             <Form onSubmit={handleSubmit}>
               <Form.Group className="mb-3">

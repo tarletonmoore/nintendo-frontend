@@ -17,6 +17,8 @@ export function Content(props) {
   const [consoles, setConsoles] = useState([])
   const [games, setGames] = useState([])
   const [favorites, setFavorites] = useState([])
+  const [errors, setErrors] = useState([]);
+
 
   const getConsoleData = () => {
     if (localStorage.jwt === undefined && window.location.href !== "http://localhost:5173/login") {
@@ -51,7 +53,10 @@ export function Content(props) {
     axios.post("http://localhost:3000/games.json", params).then((response) => {
       setGames([...games, response.data]);
       successCallback();
-    });
+    }).catch((error) => {
+      console.log(error.response);
+      setErrors(["Field(s) Can't Be Blank"]);
+    });;
   };
 
   const getFavoritesData = () => {
@@ -78,7 +83,7 @@ export function Content(props) {
         <Route path="/consoles" element={<ConsolesIndex consoles={consoles} />} />
         <Route path="/games" element={<GamesIndex games={games} />} />
         <Route path="/consoles/:id" element={<ConsolesShow />} />
-        <Route path="/games/new" element={<GamesNew onCreateGame={handleCreateGame} consoles={consoles} />} />
+        <Route path="/games/new" element={<GamesNew onCreateGame={handleCreateGame} consoles={consoles} errors={errors} />} />
         <Route path="/consoles/new" element={<ConsolesNew onCreateConsole={handleCreateConsole} />} />
         <Route path="/me" element={<Profile currentUser={props.currentUser} favorites={favorites} setCurrentUser={props.setCurrentUser} />} />
         <Route path="/carted_games" element={<CartedGamesIndex />} />

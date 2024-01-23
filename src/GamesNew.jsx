@@ -1,4 +1,4 @@
-import { Form, Button, Card } from 'react-bootstrap';
+import { Form, Button, Card, Alert } from 'react-bootstrap';
 
 
 export function GamesNew(props) {
@@ -14,6 +14,15 @@ export function GamesNew(props) {
   return (
     <div>
       <h1>New Game</h1>
+      {props.errors.length > 0 && (
+        <Alert variant="danger">
+          <ul>
+            {props.errors.map((error, index) => (
+              <li key={index}>{error}</li>
+            ))}
+          </ul>
+        </Alert>
+      )}
       <div className="d-flex justify-content-center align-items-center">
         <Card className="console" >
           <Card.Body>

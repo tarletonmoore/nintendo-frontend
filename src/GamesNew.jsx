@@ -12,7 +12,7 @@ export function GamesNew(props) {
 
 
   return (
-    <div>
+    <div >
       <h1>New Game</h1>
       {props.errors.length > 0 && (
         <Alert variant="danger">

@@ -1,4 +1,4 @@
-import { Form, Button, Card } from 'react-bootstrap';
+import { Form, Button, Card, Alert } from 'react-bootstrap';
 
 export function ConsolesNew(props) {
 
@@ -13,6 +13,15 @@ export function ConsolesNew(props) {
   return (
     <div >
       <h1>New Console</h1>
+      {props.consoleErrors.length > 0 && (
+        <Alert variant="danger">
+          <ul>
+            {props.consoleErrors.map((error, index) => (
+              <li key={index}>{error}</li>
+            ))}
+          </ul>
+        </Alert>
+      )}
       <div className="d-flex justify-content-center align-items-center">
         <Card className="console" >
           <Card.Body>

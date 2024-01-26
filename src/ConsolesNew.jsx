@@ -12,6 +12,7 @@ export function ConsolesNew(props) {
 
   return (
     <div >
+      <br></br>
       <h1>New Console</h1>
       {props.consoleErrors.length > 0 && (
         <Alert variant="danger">

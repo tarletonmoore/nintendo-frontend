@@ -20,7 +20,7 @@ const BackgroundMusic = () => {
 
   return (
     <div>
-      <Button variant="light" onClick={toggleAudio} className="musicbutton">
+      <Button variant="light" onClick={toggleAudio} className="musicbutton" style={{ marginTop: "10px" }}>
         {isPlaying ? "Stop Music" : "Play Music"}
       </Button>
     </div>

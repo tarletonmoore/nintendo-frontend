@@ -33,17 +33,17 @@ export function ConsolesNew(props) {
                   style={{ width: '300px' }}
                 />
               </Form.Group>
-
+              <hr></hr>
               <Form.Group className="mb-3" >
                 <Form.Label>Image:</Form.Label>
                 <Form.Control type="text" name="image" placeholder="Enter console image URL" style={{ width: '300px' }} />
               </Form.Group>
-
+              <hr></hr>
               <Form.Group className="mb-3">
                 <Form.Label>Year Released:</Form.Label>
                 <Form.Control type="text" name="year" placeholder="Enter year released" style={{ width: '300px' }} />
               </Form.Group>
-
+              <hr></hr>
               <Button variant="primary" type="submit" className="formbutton">
                 Create console
               </Button>

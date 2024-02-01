@@ -32,21 +32,22 @@ export function GamesNew(props) {
                 <Form.Label>Title:</Form.Label>
                 <Form.Control type="text" name="title" placeholder="Enter game title" style={{ width: '300px' }} />
               </Form.Group>
-
+              <hr></hr>
               <Form.Group className='mb-3'>
                 <Form.Label>Image:</Form.Label>
                 <Form.Control type="text" name="image" placeholder="Enter game image URL" style={{ width: '300px' }} />
               </Form.Group>
-
+              <hr></hr>
               <Form.Group className='mb-3'>
                 <Form.Label>Price:</Form.Label>
                 <Form.Control type="number" name="price" placeholder="Enter game price" style={{ width: '300px' }} />
               </Form.Group>
-
+              <hr></hr>
               <Form.Group className='mb-3'>
                 <Form.Label>Stock:</Form.Label>
                 <Form.Control type="number" name="stock" placeholder="Enter game stock" style={{ width: '300px' }} />
               </Form.Group>
+              <hr></hr>
               <Form.Group className='mb-3'>
                 <Form.Label>Console:</Form.Label>
                 <Form.Control as="select" name="console_id" style={{ width: '300px' }}>
@@ -55,6 +56,7 @@ export function GamesNew(props) {
                   ))}
                 </Form.Control>
               </Form.Group>
+              <hr></hr>
               <Button variant="primary" type="submit" className="formgamesbutton">
                 Create game
               </Button>

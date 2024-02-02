@@ -87,7 +87,7 @@ export function ConsolesIndex(props) {
                 </Link>
               </Card.Body>
             </Card>
-
+            <hr></hr>
           </Col>
         ))
         }

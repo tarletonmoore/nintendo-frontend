@@ -25,7 +25,7 @@ export function Signup() {
 
   return (
     <div id="signup">
-      <Card className="signup card">
+      <Card className="signup card" style={{ marginLeft: "400px" }}>
         <Card.Body>
           <h1 className="signup">Signup</h1>
           {errors.length > 0 && (
@@ -37,31 +37,35 @@ export function Signup() {
               </ul>
             </Alert>
           )}
-          <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-3">
-              <Form.Label>Name:</Form.Label>
-              <Form.Control type="text" name="name" placeholder="Enter your name" style={{ width: "300px" }} />
-            </Form.Group>
+          <div className="d-flex justify-content-center align-items-center">
 
-            <Form.Group className="mb-3">
-              <Form.Label>Email:</Form.Label>
-              <Form.Control type="email" name="email" placeholder="Enter your email" style={{ width: "300px" }} />
-            </Form.Group>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group className="mb-3">
+                <Form.Label>Name:</Form.Label>
+                <Form.Control type="text" name="name" placeholder="Enter your name" style={{ width: "300px" }} />
+              </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Password:</Form.Label>
-              <Form.Control type="password" name="password" placeholder="Enter your password" style={{ width: "300px" }} />
-            </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Email:</Form.Label>
+                <Form.Control type="email" name="email" placeholder="Enter your email" style={{ width: "300px" }} />
+              </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Password Confirmation:</Form.Label>
-              <Form.Control type="password" name="password_confirmation" placeholder="Confirm your password" style={{ width: "300px" }} />
-            </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Password:</Form.Label>
+                <Form.Control type="password" name="password" placeholder="Enter your password" style={{ width: "300px" }} />
+              </Form.Group>
 
-            <Button type="submit" variant="primary" className="signupbutton">
-              Signup
-            </Button>
-          </Form>
+              <Form.Group className="mb-3">
+                <Form.Label>Password Confirmation:</Form.Label>
+                <Form.Control type="password" name="password_confirmation" placeholder="Confirm your password" style={{ width: "300px" }} />
+              </Form.Group>
+
+              <Button type="submit" variant="primary" className="signupbutton">
+                Signup
+              </Button>
+            </Form>
+          </div>
+
         </Card.Body>
       </Card>
     </div>

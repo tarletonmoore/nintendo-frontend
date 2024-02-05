@@ -44,7 +44,7 @@ export function Login() {
               </ul>
             </Alert>
           )}
-          <div className="login-container">
+          <div className="d-flex justify-content-center align-items-center">
             <Form onSubmit={handleSubmit}>
               <Form.Group className="mb-3">
                 <Form.Label>Email:</Form.Label>

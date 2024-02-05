@@ -124,10 +124,14 @@ div.gameshow.card {
 
 .login.card {
   background-color: lightgray;
+  width: 60%;
+  margin-left: 300px;
+  padding-bottom: 20px;
 }
 
 .signup.card {
   background-color: lightgray;
+  width: 50%;
 }
 
 .loginemail {
@@ -148,7 +152,7 @@ div.gameshow.card {
 
 .signupbutton {
   /* margin-left: 220px; */
-  margin-left: 50px;
+  margin-left: 110px;
 }
 
 .cartedcost {

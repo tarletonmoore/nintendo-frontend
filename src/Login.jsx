@@ -56,13 +56,13 @@ export function Login() {
                 <Form.Control type="password" name="password" placeholder="Enter your password" style={{ width: '300px' }} />
               </Form.Group>
 
-              <Button type="submit" variant="primary">
+              <Button type="submit" variant="primary" style={{ marginLeft: "120px" }}>
                 Login
               </Button>
             </Form>
           </div>
         </Card.Body>
       </Card>
-    </div>
+    </div >
   );
 }

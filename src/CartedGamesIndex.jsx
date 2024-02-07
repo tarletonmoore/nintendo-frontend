@@ -108,10 +108,12 @@ export function CartedGamesIndex() {
                 </div>
               </Card.Body>
               <ListGroup className="list-group-flush">
-                <ListGroupItem>Quantity: {cartedGame.quantity}</ListGroupItem>
+                <ListGroupItem className="border-dark">Quantity: {cartedGame.quantity}</ListGroupItem>
 
                 <ListGroup.Item className="border-dark">Cost: ${cartedGame.game.price * cartedGame.quantity}</ListGroup.Item>
-
+                <ListGroup.Item className="border-dark">{cartedGame.game.stock > 0 ? (<p className="boldp" style={{ color: 'green' }}>In Stock</p>) : (
+                  <p className="boldp" style={{ color: 'red' }}>Out of stock</p>
+                )}</ListGroup.Item>
 
               </ListGroup>
               <Card.Body>

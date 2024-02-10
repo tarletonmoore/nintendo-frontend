@@ -4,14 +4,16 @@ import fatality from "./assets/fatality.mp3"
 
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
-import { Col, ListGroupItem } from "react-bootstrap"
+import { CardBody, Col, ListGroupItem } from "react-bootstrap"
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal"
 
 export function CartedGamesIndex() {
   const [cartedGames, setCartedGames] = useState([])
   const [mkElement] = useState(new Audio(fatality))
-  const [showAlert, setShowAlert] = useState(false);
+  const [showAlert, setShowAlert] = useState(false)
+  const [savedCartedGames, setSavedCartedGames] = useState([]);
+
 
   const getCartedGames = () => {
     if (localStorage.jwt === undefined && window.location.href !== "http://localhost:5173/login") {
@@ -20,6 +22,17 @@ export function CartedGamesIndex() {
     else {
       axios.get("http://localhost:3000/carted_games.json").then(response => {
         setCartedGames(response.data)
+      })
+    }
+  }
+
+  const getsavedCartedGames = () => {
+    if (localStorage.jwt === undefined && window.location.href !== "http://localhost:5173/login") {
+      window.location.href = "/login"
+    }
+    else {
+      axios.get("http://localhost:3000/savedindex.json").then(response => {
+        setSavedCartedGames(response.data)
       })
     }
   }
@@ -41,6 +54,18 @@ export function CartedGamesIndex() {
       // Handle errors if deletion fails
     }
   }
+
+  const handleDeleteSavedGame = async (savedCartedGameId) => {
+    try {
+      await axios.delete(`http://localhost:3000/destroysaved/${savedCartedGameId}.json`);
+      // Refresh saved carted games after deletion
+      getsavedCartedGames();  // <-- Correct function name
+    } catch (error) {
+      console.error('Error deleting game:', error);
+      // Handle errors if deletion fails
+    }
+  };
+
 
   const subtotalCost = cartedGames.reduce((total, cartedGame) => {
     const itemTotal = cartedGame.game.price * cartedGame.quantity;
@@ -87,7 +112,30 @@ export function CartedGamesIndex() {
   };
 
 
+
+  const handleSaveForLater = async (cartedGameId) => {
+    try {
+      // Make a PATCH request to update the carted game status
+      await axios.patch(
+        `http://localhost:3000/saveforlater/${cartedGameId}.json`,
+        { carted_game: { status: "saved" } }
+      );
+
+      getCartedGames()
+      getsavedCartedGames()
+    } catch (error) {
+      console.error('Error saving for later:', error);
+      // Handle errors, e.g., show an error message to the user
+    }
+  };
+
+
+
+
+
+  console.log(savedCartedGames)
   useEffect(getCartedGames, [])
+  useEffect(getsavedCartedGames, [])
   return (
     <div>
       {cartedGames.length > 0 ? (
@@ -117,7 +165,8 @@ export function CartedGamesIndex() {
 
               </ListGroup>
               <Card.Body>
-                <Button onClick={() => handleDeleteGame(cartedGame.id)}>Remove from Cart</Button>
+                <Button style={{ marginRight: "200px", marginLeft: "100px" }} onClick={() => handleDeleteGame(cartedGame.id)}>Remove from Cart</Button>
+                <Button onClick={() => handleSaveForLater(cartedGame.id)}>Save for later</Button>
               </Card.Body>
             </Card>
 
@@ -142,6 +191,50 @@ export function CartedGamesIndex() {
 
         </div>
       )}
+
+      <div>
+        <br></br>
+        <h2 style={{ textAlign: "center" }}>Saved For Later</h2>
+        {savedCartedGames && savedCartedGames.length > 0 ? (
+          savedCartedGames.map((savedCartedGame) => (
+            < Col key={savedCartedGame.id} lg={6}>
+
+              <Card
+                className="game card mt-8 card-border"
+                style={{ width: '90%', height: '100%' }}
+              >
+                <Card.Img variant="top" src={savedCartedGame.game.image}
+                  className="mx-auto mt-3"
+                  style={{ height: "400px", width: "500px" }}
+                />
+                <Card.Body>
+                  <div className="text-center">
+                    <Card.Title style={{ fontSize: '2rem', fontWeight: 'bold' }}>{savedCartedGame.title}</Card.Title>
+                  </div>
+                </Card.Body>
+                <ListGroup className="list-group-flush">
+
+
+                  <ListGroup.Item className="border-dark">{savedCartedGame.game.stock > 0 ? (<p className="boldp" style={{ color: 'green' }}>In Stock</p>) : (
+                    <p className="boldp" style={{ color: 'red' }}>Out of stock</p>
+                  )}</ListGroup.Item>
+
+                </ListGroup>
+                <CardBody>
+                  <Button onClick={() => handleDeleteSavedGame(savedCartedGame.id)}>Remove from Saved</Button>
+                </CardBody>
+              </Card>
+
+            </Col>
+
+
+          ))
+        ) : (
+          <p style={{ textAlign: "center", fontSize: "200%" }}>No Games Saved For Later</p>
+        )}
+      </div>
+
+
 
       <Modal show={showAlert} onHide={() => setShowAlert(false)}>
         <Modal.Header closeButton style={{ backgroundColor: '#dc3545', color: 'white' }}>

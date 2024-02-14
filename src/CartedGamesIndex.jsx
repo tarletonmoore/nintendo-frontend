@@ -129,11 +129,32 @@ export function CartedGamesIndex() {
     }
   };
 
+  const handleAddBackToCart = async (savedCartedGameId) => {
+    try {
+      // Make a PATCH request to update the saved carted game status
+      const response = await axios.patch(
+        `http://localhost:3000/add_back_to_cart/${savedCartedGameId}.json`);
 
+      // Check the response status or data if needed
+      console.log('Add to cart response:', response.data);
 
+      // Fetch updated carted games from your backend
+      const updatedCartedGamesResponse = await axios.get('http://localhost:3000/carted_games.json');
 
+      // Update the state with the updated carted games
+      setCartedGames(updatedCartedGamesResponse.data);
 
-  console.log(savedCartedGames)
+      // Fetch updated saved carted games from your backend
+      const updatedSavedGamesResponse = await axios.get('http://localhost:3000/savedindex.json');
+
+      // Update the state with the updated saved carted games
+      setSavedCartedGames(updatedSavedGamesResponse.data);
+    } catch (error) {
+      console.error('Error adding to cart:', error);
+      // Handle errors, e.g., show an error message to the user
+    }
+  };
+
   useEffect(getCartedGames, [])
   useEffect(getsavedCartedGames, [])
   return (
@@ -162,11 +183,13 @@ export function CartedGamesIndex() {
                 <ListGroup.Item className="border-dark">{cartedGame.game.stock > 0 ? (<p className="boldp" style={{ color: 'green' }}>In Stock</p>) : (
                   <p className="boldp" style={{ color: 'red' }}>Out of stock</p>
                 )}</ListGroup.Item>
-
+                <ListGroup.Item>
+                  <Button onClick={() => handleSaveForLater(cartedGame.id)}>Save for later</Button>
+                </ListGroup.Item>
               </ListGroup>
               <Card.Body>
-                <Button style={{ marginRight: "200px", marginLeft: "100px" }} onClick={() => handleDeleteGame(cartedGame.id)}>Remove from Cart</Button>
-                <Button onClick={() => handleSaveForLater(cartedGame.id)}>Save for later</Button>
+                <Button onClick={() => handleDeleteGame(cartedGame.id)}>Remove from Cart</Button>
+
               </Card.Body>
             </Card>
 
@@ -194,7 +217,7 @@ export function CartedGamesIndex() {
 
       <div>
         <br></br>
-        <h2 style={{ textAlign: "center" }}>Saved For Later</h2>
+        <h2 style={{ textAlign: "center", fontSize: "40px", fontWeight: "bold" }}>Saved For Later</h2>
         {savedCartedGames && savedCartedGames.length > 0 ? (
           savedCartedGames.map((savedCartedGame) => (
             < Col key={savedCartedGame.id} lg={6}>
@@ -218,10 +241,19 @@ export function CartedGamesIndex() {
                   <ListGroup.Item className="border-dark">{savedCartedGame.game.stock > 0 ? (<p className="boldp" style={{ color: 'green' }}>In Stock</p>) : (
                     <p className="boldp" style={{ color: 'red' }}>Out of stock</p>
                   )}</ListGroup.Item>
+                  {savedCartedGame.game.stock > 0 && (
+                    <ListGroup.Item>
 
+                      <Button onClick={() => handleAddBackToCart(savedCartedGame.id)}>
+                        Add Back To Cart
+                      </Button>
+                    </ListGroup.Item>
+
+                  )}
                 </ListGroup>
                 <CardBody>
                   <Button onClick={() => handleDeleteSavedGame(savedCartedGame.id)}>Remove from Saved</Button>
+
                 </CardBody>
               </Card>
 

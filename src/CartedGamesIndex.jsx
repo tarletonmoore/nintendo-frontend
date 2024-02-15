@@ -217,7 +217,9 @@ export function CartedGamesIndex() {
 
       <div>
         <br></br>
-        <h2 style={{ textAlign: "center", fontSize: "40px", fontWeight: "bold" }}>Saved For Later</h2>
+        {savedCartedGames && savedCartedGames.length > 0 ? (
+          <h2 style={{ textAlign: "center", fontSize: "40px", fontWeight: "bold" }}>Saved For Later</h2>) : (null)}
+
         {savedCartedGames && savedCartedGames.length > 0 ? (
           savedCartedGames.map((savedCartedGame) => (
             < Col key={savedCartedGame.id} lg={6}>
@@ -261,9 +263,9 @@ export function CartedGamesIndex() {
 
 
           ))
-        ) : (
-          <p style={{ textAlign: "center", fontSize: "200%" }}>No Games Saved For Later</p>
-        )}
+        ) :
+          (null)
+        }
       </div>
 
 

@@ -228,6 +228,7 @@ export function CartedGamesIndex() {
                 className="game card mt-8 card-border"
                 style={{ width: '90%', height: '100%' }}
               >
+                <Button variant="danger" onClick={() => handleDeleteSavedGame(savedCartedGame.id)} style={{ float: "right", width: "10%", marginLeft: "auto" }}>X</Button>
                 <Card.Img variant="top" src={savedCartedGame.game.image}
                   className="mx-auto mt-3"
                   style={{ height: "400px", width: "500px" }}
@@ -253,10 +254,10 @@ export function CartedGamesIndex() {
 
                   )}
                 </ListGroup>
-                <CardBody>
+                {/* <CardBody>
                   <Button onClick={() => handleDeleteSavedGame(savedCartedGame.id)}>Remove from Saved</Button>
 
-                </CardBody>
+                </CardBody> */}
               </Card>
 
             </Col>

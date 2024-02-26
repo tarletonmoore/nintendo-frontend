@@ -254,10 +254,7 @@ export function CartedGamesIndex() {
 
                   )}
                 </ListGroup>
-                {/* <CardBody>
-                  <Button onClick={() => handleDeleteSavedGame(savedCartedGame.id)}>Remove from Saved</Button>
 
-                </CardBody> */}
               </Card>
 
             </Col>

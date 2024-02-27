@@ -51,7 +51,6 @@ export function CartedGamesIndex() {
       getCartedGames();
     } catch (error) {
       console.error('Error deleting game:', error);
-      // Handle errors if deletion fails
     }
   }
 
@@ -59,10 +58,9 @@ export function CartedGamesIndex() {
     try {
       await axios.delete(`http://localhost:3000/destroysaved/${savedCartedGameId}.json`);
       // Refresh saved carted games after deletion
-      getsavedCartedGames();  // <-- Correct function name
+      getsavedCartedGames();
     } catch (error) {
       console.error('Error deleting game:', error);
-      // Handle errors if deletion fails
     }
   };
 
@@ -107,7 +105,6 @@ export function CartedGamesIndex() {
       }
     } catch (error) {
       console.error('Error during purchase:', error);
-      // Handle errors if the purchase fails
     }
   };
 
@@ -125,7 +122,6 @@ export function CartedGamesIndex() {
       getsavedCartedGames()
     } catch (error) {
       console.error('Error saving for later:', error);
-      // Handle errors, e.g., show an error message to the user
     }
   };
 
@@ -151,7 +147,6 @@ export function CartedGamesIndex() {
       setSavedCartedGames(updatedSavedGamesResponse.data);
     } catch (error) {
       console.error('Error adding to cart:', error);
-      // Handle errors, e.g., show an error message to the user
     }
   };
 

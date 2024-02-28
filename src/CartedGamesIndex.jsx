@@ -4,7 +4,7 @@ import fatality from "./assets/fatality.mp3"
 
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
-import { CardBody, Col, ListGroupItem } from "react-bootstrap"
+import { Col, ListGroupItem } from "react-bootstrap"
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal"
 
